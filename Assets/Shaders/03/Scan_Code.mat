@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Scan_Code
+  m_Shader: {fileID: 4800000, guid: 8519734a1d0902345be5517c25ebc90e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FlowTex:
+        m_Texture: {fileID: 2800000, guid: 2336e0a32064f2d47839822dd34cebde, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 1, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 4c4074307ad26cf4c8b4131275a95f30, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _FlowIntensity: 0.72
+    - _InnerAlpha: 0.233
+    - _RimIntensity: 1.77
+    - _RimMax: 0.51
+    - _RimMin: 0.29
+    m_Colors:
+    - _FLowSpeed: {r: 1, g: 1, b: 0, a: 0}
+    - _FLowTilling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 0.20825918, g: 0.46778214, b: 0.6792453, a: 1}
+    - _RimColor: {r: 0.3490566, g: 0.24532752, b: 0.24532752, a: 0}
+  m_BuildTextureStacks: []
