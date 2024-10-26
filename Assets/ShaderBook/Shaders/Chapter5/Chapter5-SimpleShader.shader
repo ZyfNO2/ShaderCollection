@@ -12,7 +12,10 @@
             #pragma fragment frag
             
             uniform fixed4 _Color;
-
+			///定义了一个结构体，作为输入
+			///vertex : POSITION;顶点坐标
+			///normal : NORMAL;法线向量
+			///texcoord : TEXCOORD0;纹理坐标0
 			struct a2v {
                 float4 vertex : POSITION;
 				float3 normal : NORMAL;
