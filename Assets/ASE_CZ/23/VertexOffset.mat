@@ -24,7 +24,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _77777:
-        m_Texture: {fileID: 2800000, guid: e5cde70fb40ee184183d3e71d840141c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 24f6f4602f9795e4db628889a703dbe7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Blur1:
+        m_Texture: {fileID: 2800000, guid: 50250e99be08a3644a95b8c76ff5b934, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 24f6f4602f9795e4db628889a703dbe7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 8750f851265b04240b72b2a022cac737, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -32,8 +44,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _FX: 0.2
+    - _FY: 0.2
+    - _Hehght2: 1.5
+    - _Height: -0.8
+    - _NX: 0.2
+    - _NY: 0.2
     m_Colors:
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SubColor: {r: 0.14858487, g: 0.21488956, b: 0.5, a: 1}
+    - _MainColor: {r: 4.7303114, g: 2.5213451, b: 2.5213451, a: 1}
+    - _SubColor: {r: 0.30371127, g: 0.35998333, b: 0.6132076, a: 1}
   m_BuildTextureStacks: []
