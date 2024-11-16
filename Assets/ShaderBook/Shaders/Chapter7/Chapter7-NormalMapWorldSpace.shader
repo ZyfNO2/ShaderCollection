@@ -37,6 +37,7 @@
 			struct v2f {
 				float4 pos : SV_POSITION;
 				float4 uv : TEXCOORD0;
+				//切线空间到世界空间的矩阵每一行
 				float4 TtoW0 : TEXCOORD1;  
 				float4 TtoW1 : TEXCOORD2;  
 				float4 TtoW2 : TEXCOORD3; 
@@ -71,6 +72,7 @@
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(worldPos));
 				
 				// Get the normal in tangent space
+				//对法线纹理采样解码（由像素值求法线）
 				fixed3 bump = UnpackNormal(tex2D(_BumpMap, i.uv.zw));
 				bump.xy *= _BumpScale;
 				bump.z = sqrt(1.0 - saturate(dot(bump.xy, bump.xy)));

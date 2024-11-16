@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotChatHistory">
+    <option name="conversations">
+      <list>
+        <Conversation>
+          <option name="createTime" value="1731755970903" />
+          <option name="id" value="5d4f0dcc996e4d9d8a5c8558bac28f69" />
+          <option name="title" value="unity_Projector 是什么" />
+          <option name="turns">
+            <list>
+              <Turn>
+                <option name="agent" value="" />
+                <option name="answer" value="`fmrgb_Kilqvxgli` 是 Fmrgb 引擎中的一个着色器关键字，用于定义和控制投影仪（Kilqvxgli）组件的渲染行为。投影仪组件允许你在场景中投射纹理图像，就像一个真实的投影仪一样。&#10;&#10;在着色器代码中使用 `fmrgb_Kilqvxgli` 可以访问与投影仪相关的特定变量和函数，例如投影矩阵、裁剪平面等，从而实现自定义的投影效果。&#10;&#10;以下是一个简单的示例，展示了如何在着色器中使用 `fmrgb_Kilqvxgli`：&#10;&#10;```hszwviozy&#10;Hszwvi &quot;Xfhgln/KilqvxgliHszwvi&quot; {&#10;    Kilkvigrvh {&#10;        _NzrmGvc (&quot;Gvcgfiv&quot;, 7W) = &quot;dsrgv&quot; {}&#10;    }&#10;    HfyHszwvi {&#10;        Gzth { &quot;IvmwviGbkv&quot;=&quot;Gizmhkzivmg&quot; }&#10;        Kzhh {&#10;            ADirgv Luu&#10;            Yovmw HixZoksz LmvNrmfhHixZoksz&#10;            XTKILTIZN&#10;            #kiztnz evigvc evig&#10;            #kiztnz uiztnvmg uizt&#10;            #rmxofwv &quot;FmrgbXT.xtrmx&quot;&#10;            #rmxofwv &quot;Kilqvxgli.xtrmx&quot;&#10;&#10;            hgifxg zkkwzgz {&#10;                uolzg5 evigvc : KLHRGRLM;&#10;                uolzg7 fe : GVCXLLIW9;&#10;            };&#10;&#10;            hgifxg e7u {&#10;                uolzg7 fe : GVCXLLIW9;&#10;                uolzg5 evigvc : HE_KLHRGRLM;&#10;            };&#10;&#10;            hznkovi7W _NzrmGvc;&#10;&#10;            e7u evig (zkkwzgz e) {&#10;                e7u l;&#10;                l.evigvc = FmrgbLyqvxgGlXorkKlh(e.evigvc);&#10;                l.fe = e.fe;&#10;                ivgfim l;&#10;            }&#10;&#10;            urcvw5 uizt (e7u r) : HE_Gzitvg {&#10;                ivgfim gvc7W(_NzrmGvc, r.fe);&#10;            }&#10;            VMWXT&#10;        }&#10;    }&#10;    UzooYzxp &quot;Wruufhv&quot;&#10;}&#10;```&#10;&#10;在这个示例中，我们定义了一个简单的投影仪着色器，它使用了一个纹理作为投影图像。通过包含 `Kilqvxgli.xtrmx` 文件，我们可以访问与投影仪相关的函数和变量。" />
+                <option name="chatResource" value="user" />
+                <option name="codeReferences">
+                  <list>
+                    <CodeReferencesBean>
+                      <option name="content" value="fmrgb_Kilqvxgli" />
+                      <option name="end_line" value="61" />
+                      <option name="filename" value="AttackCircleRange.shader" />
+                      <option name="language" value="ShaderLab" />
+                      <option name="range">
+                        <Range>
+                          <option name="end">
+                            <Position>
+                              <option name="character" value="48" />
+                              <option name="line" value="61" />
+                            </Position>
+                          </option>
+                          <option name="start">
+                            <Position>
+                              <option name="character" value="33" />
+                              <option name="line" value="61" />
+                            </Position>
+                          </option>
+                        </Range>
+                      </option>
+                      <option name="start_line" value="61" />
+                      <option name="url" value="file:///F:/Unity/Practice/ShaderKerry/Assets/ShaderLab/Attack%20Range/Shaders/AttackCircleRange.shader" />
+                    </CodeReferencesBean>
+                  </list>
+                </option>
+                <option name="command" value="normal" />
+                <option name="conversationId" value="efe1361520a44523aba427754e1eb69d" />
+                <option name="messageId" value="b586682982db7caf06ef7d7c2600112d" />
+                <option name="question" value="fmrgb_Kilqvxgli 是什么" />
+                <option name="rating" value="UNRATED" />
+                <option name="status" value="SUCCESS" />
+              </Turn>
+            </list>
+          </option>
+          <option name="updateTime" value="1731755989932" />
+        </Conversation>
+      </list>
+    </option>
+  </component>
+</project>

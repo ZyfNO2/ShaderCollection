@@ -2,7 +2,9 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 	Properties {
 		_Color ("Color Tint", Color) = (1, 1, 1, 1)
 		_MainTex ("Main Tex", 2D) = "white" {}
+		//BumpMap -> Unity内置法线纹理
 		_BumpMap ("Normal Map", 2D) = "bump" {}
+		//控制凹凸
 		_BumpScale ("Bump Scale", Float) = 1.0
 		_Specular ("Specular", Color) = (1, 1, 1, 1)
 		_Gloss ("Gloss", Range(8.0, 256)) = 20
@@ -30,6 +32,7 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 			struct a2v {
 				float4 vertex : POSITION;
 				float3 normal : NORMAL;
+				//顶点切线
 				float4 tangent : TANGENT;
 				float4 texcoord : TEXCOORD0;
 			};
@@ -76,7 +79,8 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 			v2f vert(a2v v) {
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
-				
+
+				// xy  保存了纹理  zw 保存了高度
 				o.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				o.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
 
@@ -85,8 +89,12 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				///
 
 				// Construct a matrix that transforms a point/vector from tangent space to world space
+				//法线向量变换以及切线变换
 				fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);  
-				fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);  
+				fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);
+				//负切线 和法线切线同时垂直的方向又两个 w决定使用哪一个方向
+				//float3=3 rotation = float3=3(v.tangent.xyz,binormal,v.normal);
+				//1
 				fixed3 worldBinormal = cross(worldNormal, worldTangent) * v.tangent.w; 
 
 				/*
@@ -99,9 +107,11 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				*/
 				
 				//wToT = the inverse of tToW = the transpose of tToW as long as tToW is an orthogonal matrix.
+				//2
 				float3x3 worldToTangent = float3x3(worldTangent, worldBinormal, worldNormal);
-
+ 
 				// Transform the light and view dir from world space to tangent space
+				//模型空间的光照和视角方向 变换到切线空间
 				o.lightDir = mul(worldToTangent, WorldSpaceLightDir(v.vertex));
 				o.viewDir = mul(worldToTangent, WorldSpaceViewDir(v.vertex));
 
@@ -136,8 +146,11 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 //				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
 				
 				// Or mark the texture as "Normal map", and use the built-in funciton
+				//反映射
 				tangentNormal = UnpackNormal(packedNormal);
+				//控制凹凸
 				tangentNormal.xy *= _BumpScale;
+				//x2 +y2 + z2 = 1
 				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
 				
 				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;

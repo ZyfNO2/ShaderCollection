@@ -42,7 +42,7 @@
 				o.worldNormal = UnityObjectToWorldNormal(v.normal);
 				
 				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-				
+				//一步完成纹理和偏移
 				o.uv = TRANSFORM_TEX(v.texcoord, _RampTex);
 				
 				return o;
@@ -55,6 +55,7 @@
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
 				
 				// Use the texture to sample the diffuse color
+				//0.5的倍数字 + 偏移
 				fixed halfLambert  = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
 				fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
 				
