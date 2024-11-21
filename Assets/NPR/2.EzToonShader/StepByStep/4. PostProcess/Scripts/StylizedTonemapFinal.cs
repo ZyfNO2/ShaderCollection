@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 [Serializable]
-[PostProcess(typeof(StylizedTonemapFinalRenderer), PostProcessEvent.AfterStack, "Get Started With Shaders/Stylized Tonemap Final")]
+ //[PostProcess(typeof(StylizedTonemapFinalRenderer), PostProcessEvent.AfterStack, "Get Started With Shaders/Stylized Tonemap Final")]
+ [PostProcess(typeof(StylizedTonemapFinalRenderer), PostProcessEvent.AfterStack, "GSST")]
 public sealed class StylizedTonemapFinal : PostProcessEffectSettings
 {
     [Range(-2f, 2f)]
@@ -20,7 +21,9 @@ public sealed class StylizedTonemapFinalRenderer : PostProcessEffectRenderer<Sty
 {
     public override void Render(PostProcessRenderContext context)
     {
-        var sheet = context.propertySheets.Get(Shader.Find("Hidden/Get Started With Shaders/4. Stylized Tonemap Final"));
+        //Hidden 不会出现在面板上
+        //var sheet = context.propertySheets.Get(Shader.Find("Hidden/Get Started With Shaders/4. Stylized Tonemap Final"));
+        var sheet = context.propertySheets.Get(Shader.Find("Hidden/GSST/PostProcessing"));
         sheet.properties.SetFloat("_Exposure", settings.exposure);
         sheet.properties.SetFloat("_Saturation", settings.saturation);
         sheet.properties.SetFloat("_Contrast", settings.contrast);

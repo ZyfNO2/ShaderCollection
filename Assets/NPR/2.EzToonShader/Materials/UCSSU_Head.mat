@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UCSSU_Head
-  m_Shader: {fileID: 4800000, guid: e6378800434c14144ae909cfab833d5c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8c1da86fcd73c1d4fa137d0fa75c040c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -92,6 +92,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: da6c685aa91a7064aa664477358de1b0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _HighColor_Tex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -154,6 +158,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ShadingGradeMap:
         m_Texture: {fileID: 2800000, guid: f26a8cc0ac6c4dc4eb3ada45506b69b3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColor1stTex:
+        m_Texture: {fileID: 2800000, guid: 4b3fbcd7d01380f4fabea7c5c10a9adc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColor2ndTex:
+        m_Texture: {fileID: 2800000, guid: 05832d1edf0c90240bdd7761bad4830d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -244,7 +256,7 @@ Material:
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
-    - _OutlineWidth: 2.576
+    - _OutlineWidth: 0.474
     - _Outline_Width: 2
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -266,7 +278,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularPower: 17.97
+    - _SpecularPower: 18.69
     - _SpecularThreshold: 0.435
     - _SrcBlend: 1
     - _StencilComp: 0
@@ -316,8 +328,10 @@ Material:
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 0.9811321, g: 0.8270221, b: 0.63403344, a: 1}
     - _ShadowColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+    - _ShadowColor1st: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor2nd: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpecularColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
+    - _SpecularColor: {r: 11.622642, g: 11.622642, b: 11.622642, a: 1}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
     - __SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

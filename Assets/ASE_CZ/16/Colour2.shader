@@ -141,17 +141,17 @@ Version=19105
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;472.2802,-384.821;Float;False;True;-1;2;ASEMaterialInspector;100;5;Colour2;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;True;4;1;False;;1;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;2;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;0;1;True;False;;False;0
 Node;AmplifyShaderEditor.ColorNode;1;-314.4331,-353.9413;Inherit;False;Property;_Color0;Color 0;1;1;[HDR];Create;True;0;0;0;False;0;False;0.9245283,0.0566928,0.0566928,1;5.590881,0.3428372,0.3428372,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RGBToHSVNode;4;-30.49837,-317.5345;Inherit;False;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.HSVToRGBNode;3;415.4007,-287.2247;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.SimpleAddOpNode;5;186.7745,-215.4175;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;7;205.8494,15.62695;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;6;-111.5514,-71.01069;Inherit;False;Property;_Float0;Float 0;0;0;Create;True;0;0;0;False;0;False;0;1.85;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.HSVToRGBNode;3;480.4007,-68.2247;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 WireConnection;0;0;3;0
 WireConnection;4;0;1;0
-WireConnection;3;0;5;0
-WireConnection;3;1;4;2
-WireConnection;3;2;4;3
 WireConnection;5;0;4;1
 WireConnection;5;1;7;0
 WireConnection;7;0;6;0
+WireConnection;3;0;5;0
+WireConnection;3;1;4;2
+WireConnection;3;2;4;3
 ASEEND*/
-//CHKSM=001464499C33275AEC9825345A735280FD97B0EE
+//CHKSM=7BF71A980D3908852A945D2C4B34E0614EB242A9

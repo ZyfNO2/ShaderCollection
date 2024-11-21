@@ -274,7 +274,9 @@ MonoBehaviour:
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
-  m_AfterStackBundles: []
+  m_AfterStackBundles:
+  - assemblyQualifiedName: StylizedTonemapFinal, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &107426582
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1244955087
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5633,7 +5635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 167922662266861293, guid: 410977fb1e7689b4e801493b4457aa27, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 657319288659979351, guid: 410977fb1e7689b4e801493b4457aa27, type: 3}
       propertyPath: m_LocalScale.x

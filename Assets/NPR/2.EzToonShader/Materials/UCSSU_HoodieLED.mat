@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UCSSU_HoodieLED
-  m_Shader: {fileID: 4800000, guid: e6378800434c14144ae909cfab833d5c, type: 3}
+  m_Shader: {fileID: 4800000, guid: ca5087727c7eea642a8047483320229d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -77,6 +77,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: da6c685aa91a7064aa664477358de1b0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _HighColor_Tex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -117,6 +121,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RimlightMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_586D6A87_Texture_1:
         m_Texture: {fileID: 2800000, guid: 0109f5cb650745f4ab86928a140a6150, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -147,6 +155,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ShadingGradeMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColor1stTex:
+        m_Texture: {fileID: 2800000, guid: d5e4748def1cb784cbc8b1ea11a553c8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColor2ndTex:
+        m_Texture: {fileID: 2800000, guid: d5e4748def1cb784cbc8b1ea11a553c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -189,7 +205,7 @@ Material:
     - _ColorShift_Speed: 0
     - _Cull: 2
     - _CullMode: 2
-    - _Cutoff: 1
+    - _Cutoff: 0.524
     - _DetailNormalMapScale: 1
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
@@ -251,7 +267,7 @@ Material:
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
-    - _OutlineWidth: 2.576
+    - _OutlineWidth: 0.474
     - _Outline_Width: 1
     - _Parallax: 0.02
     - _QueueOffset: 5
@@ -260,6 +276,7 @@ Material:
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
     - _RimLight_Power: 0.1
+    - _RimlightPower: 20
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
@@ -277,7 +294,7 @@ Material:
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
-    - _SpecularPower: 17.97
+    - _SpecularPower: 18.69
     - _SpecularThreshold: 0.435
     - _SrcBlend: 1
     - _StencilComp: 8
@@ -329,7 +346,10 @@ Material:
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimlightColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+    - _ShadowColor1st: {r: 0.9716981, g: 0.23375754, b: 0.23375754, a: 1}
+    - _ShadowColor2nd: {r: 0.6037736, g: 0.33321467, b: 0.33321467, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}

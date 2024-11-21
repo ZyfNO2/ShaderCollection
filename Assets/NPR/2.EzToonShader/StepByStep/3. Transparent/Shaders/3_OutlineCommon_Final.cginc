@@ -4,7 +4,7 @@
 sampler2D _MainTex;
 float4 _MainTex_ST;
 half4 _Color;
-half _Cutoff;
+half _CutOff;
 
 float _OutlineWidth;
 half4 _OutlineColor;
@@ -41,7 +41,7 @@ half4 frag(v2f i) : SV_Target
 	half4 albedo = tex2D(_MainTex, i.uv) * _Color;
 
 #if defined (IS_ALPHATEST)
-	clip(albedo.a - _Cutoff);
+	clip(albedo.a - _CutOff);
 #endif
 
 	half3 col = albedo.rgb * _OutlineColor.rgb;
