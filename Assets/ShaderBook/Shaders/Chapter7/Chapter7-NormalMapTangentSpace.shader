@@ -108,6 +108,7 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				
 				//wToT = the inverse of tToW = the transpose of tToW as long as tToW is an orthogonal matrix.
 				//2
+				//副切线通常与切线和法线一起，构成一个TBN
 				float3x3 worldToTangent = float3x3(worldTangent, worldBinormal, worldNormal);
  
 				// Transform the light and view dir from world space to tangent space
@@ -134,11 +135,13 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				return o;
 			}
 			
-			fixed4 frag(v2f i) : SV_Target {				
+			fixed4 frag(v2f i) : SV_Target {
+				// 计算切线空间中的光照方向、视线方向并归一化
 				fixed3 tangentLightDir = normalize(i.lightDir);
 				fixed3 tangentViewDir = normalize(i.viewDir);
 				
 				// Get the texel in the normal map
+				// 从法线贴图中获取纹素
 				fixed4 packedNormal = tex2D(_BumpMap, i.uv.zw);
 				fixed3 tangentNormal;
 				// If the texture is not marked as "Normal map"
@@ -147,16 +150,18 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				
 				// Or mark the texture as "Normal map", and use the built-in funciton
 				//反映射
+				// 使用内置函数解包法线贴图
 				tangentNormal = UnpackNormal(packedNormal);
 				//控制凹凸
 				tangentNormal.xy *= _BumpScale;
 				//x2 +y2 + z2 = 1
+				// 重新计算z分量以保持向量长度为1
 				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
-				
+				// 获取漫反射颜色
 				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;
-				
+				// 计算环境光
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
-				
+				 // 计算漫反射
 				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(tangentNormal, tangentLightDir));
 
 				fixed3 halfDir = normalize(tangentLightDir + tangentViewDir);

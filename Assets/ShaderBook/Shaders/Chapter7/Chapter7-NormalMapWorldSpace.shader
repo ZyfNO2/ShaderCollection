@@ -46,10 +46,10 @@
 			v2f vert(a2v v) {
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
-				
+				// 将模型空间中的顶点位置转换到裁剪空间
 				o.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				o.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
-				
+				// 将模型空间中的顶点位置、法线、切线和副切线转换到世界空间
 				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;  
 				fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);  
 				fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);  
@@ -57,6 +57,7 @@
 				
 				// Compute the matrix that transform directions from tangent space to world space
 				// Put the world position in w component for optimization
+				// 计算从切线空间到世界空间的变换矩阵，并将世界位置放入w分量以优化性能
 				o.TtoW0 = float4(worldTangent.x, worldBinormal.x, worldNormal.x, worldPos.x);
 				o.TtoW1 = float4(worldTangent.y, worldBinormal.y, worldNormal.y, worldPos.y);
 				o.TtoW2 = float4(worldTangent.z, worldBinormal.z, worldNormal.z, worldPos.z);
@@ -65,6 +66,7 @@
 			}
 			
 			fixed4 frag(v2f i) : SV_Target {
+				// 计算世界空间中的光照方向和视线方向
 				// Get the position in world space		
 				float3 worldPos = float3(i.TtoW0.w, i.TtoW1.w, i.TtoW2.w);
 				// Compute the light and view dir in world space
@@ -73,10 +75,13 @@
 				
 				// Get the normal in tangent space
 				//对法线纹理采样解码（由像素值求法线）
+				// 获取切线空间中的法线
+				// 对法线纹理采样解码（由像素值求法线）
 				fixed3 bump = UnpackNormal(tex2D(_BumpMap, i.uv.zw));
 				bump.xy *= _BumpScale;
 				bump.z = sqrt(1.0 - saturate(dot(bump.xy, bump.xy)));
 				// Transform the narmal from tangent space to world space
+				//法线从切线空间转换到世界空间
 				bump = normalize(half3(dot(i.TtoW0.xyz, bump), dot(i.TtoW1.xyz, bump), dot(i.TtoW2.xyz, bump)));
 				
 				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;
