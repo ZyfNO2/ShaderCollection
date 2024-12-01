@@ -53,7 +53,9 @@
 				fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
 				
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
-				
+
+				// 使用渐变纹理采样漫反射颜色
+				// 计算半兰伯特值并用作纹理坐标
 				// Use the texture to sample the diffuse color
 				//0.5的倍数字 + 偏移
 				fixed halfLambert  = 0.5 * dot(worldNormal, worldLightDir) + 0.5;

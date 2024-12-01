@@ -73,6 +73,7 @@
 				
 			 	fixed3 halfDir = normalize(tangentLightDir + tangentViewDir);
 			 	// Get the mask value
+				// 获取高光遮罩值并应用缩放
 			 	fixed specularMask = tex2D(_SpecularMask, i.uv).r * _SpecularScale;
 			 	// Compute specular term with the specular mask
 			 	fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(tangentNormal, halfDir)), _Gloss) * specularMask;
