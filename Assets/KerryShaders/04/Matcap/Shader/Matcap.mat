@@ -54,7 +54,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _MatCapAddIntensity: 1.31
-    - _MatCapIntensity: 21.06
+    - _MatCapIntensity: 38.43
     - __dirty: 0
     m_Colors: []
   m_BuildTextureStacks: []

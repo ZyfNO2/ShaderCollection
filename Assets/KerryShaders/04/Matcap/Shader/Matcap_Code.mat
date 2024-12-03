@@ -24,14 +24,24 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: eefe45bdaf0fc6e4b9cb861130b5b570, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Matcap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a8f3ce92e0cae2340828d272f5ed6854, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MatcapAdd:
+        m_Texture: {fileID: 2800000, guid: 2e5acd8b8c6162340ba76c288caaef79, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: 7d8872ffd6c58384c917eed685d965bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _MatcapAddIntensity: 1
+    - _MatcapIntensity: 20
     m_Colors: []
   m_BuildTextureStacks: []
