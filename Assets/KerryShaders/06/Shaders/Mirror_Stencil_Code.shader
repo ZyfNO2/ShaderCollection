@@ -1,25 +1,26 @@
-Shader "Unlit/Sence_Mirror_Code"
+Shader "Unlit/Mirror_Stencil_Code"
 {
     Properties
     {
-        _Diffuse ("Texture", 2D) = "white" {}
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { "RenderType"="ApphaTest + 20" }
+        Tags { "RenderType"="Opaque" }
         LOD 100
 
         Pass
         {
-            //ColorMask 0
+            ColorMask 0
         Stencil
              {
                  Ref 1
-                 Comp Equal
-                 //Pass Replace
+                 Comp Always
+                 Pass Replace
              }  
         
         ZWrite Off
+            
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -41,14 +42,14 @@ Shader "Unlit/Sence_Mirror_Code"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _Diffuse;
-            float4 _Diffuse_ST;
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _Diffuse);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -56,7 +57,7 @@ Shader "Unlit/Sence_Mirror_Code"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_Diffuse, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
