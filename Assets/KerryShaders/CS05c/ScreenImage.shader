@@ -53,6 +53,7 @@
 				half2 screen_uv = i.screen_pos.xy / (i.screen_pos.w + 0.000001);//透视除法 -1 1
 				screen_uv = (screen_uv + 1.0) * 0.5; //0-1
 				half4 col = tex2D(_MainTex, screen_uv);
+				//对HDR解码
 				col.rgb = DecodeHDR(col, _MainTex_HDR);
 				return col;
 				//return float4(screen_uv, 0, 0);

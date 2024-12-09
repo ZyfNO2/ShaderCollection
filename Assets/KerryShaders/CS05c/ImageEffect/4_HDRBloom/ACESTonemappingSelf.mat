@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ScreenImage
-  m_Shader: {fileID: 4800000, guid: c24ff21714eccec4bb1bd3fe6cdd330d, type: 3}
+  m_Name: ACESTonemappingSelf
+  m_Shader: {fileID: 4800000, guid: c9a0cdb916b786247aca7f41ddf4ed02, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8047c9b29f8c3d245b89e762bf03cef1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

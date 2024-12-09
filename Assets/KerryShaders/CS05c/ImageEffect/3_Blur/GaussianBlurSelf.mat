@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ColorAdjustment
-  m_Shader: {fileID: 4800000, guid: 41576c5a13095a448a475e914f1bbe2d, type: 3}
+  m_Name: GaussianBlurSelf
+  m_Shader: {fileID: 4800000, guid: 70e58d16729276147af8d86b398db0da, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,12 +29,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1
-    - _Contrast: 1.2
-    - _HueShift: 0.858
-    - _Saturation: 1
-    - _VignetteIntensity: 1
-    - _VignetteRoundness: 1
-    - _VignetteSmoothness: 0.63
+    - _BlurOffset: 1
     m_Colors: []
   m_BuildTextureStacks: []

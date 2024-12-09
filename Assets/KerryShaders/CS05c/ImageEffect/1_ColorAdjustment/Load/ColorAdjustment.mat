@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ScreenImage
-  m_Shader: {fileID: 4800000, guid: c24ff21714eccec4bb1bd3fe6cdd330d, type: 3}
+  m_Name: ColorAdjustment
+  m_Shader: {fileID: 4800000, guid: 41576c5a13095a448a475e914f1bbe2d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,10 +24,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8047c9b29f8c3d245b89e762bf03cef1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Brightness: 0.93
+    - _Contrast: 1
+    - _HueShift: 0
+    - _Saturation: 1
+    - _VignetteIntensity: 1.502
+    - _VignetteRoundness: 4.01
+    - _VignetteSmoothness: 5
     m_Colors: []
   m_BuildTextureStacks: []
