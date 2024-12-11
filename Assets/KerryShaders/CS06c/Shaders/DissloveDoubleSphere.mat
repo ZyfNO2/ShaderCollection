@@ -13,7 +13,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _DIR_DISSLOVE_ON
-  - _MANNULCONTROL_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -30,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: c9a10d53f9ef84c47a947772bc9f4446, type: 3}
+        m_Texture: {fileID: 2800000, guid: c6015e9616a50914c90782b3ee6cdf34, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -39,15 +38,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ChangeAmount: 0
+    - _ChangeAmount: 1
     - _Cutoff: 0.5
     - _DIR_DISSLOVE: 1
     - _EdgeIntensity: 2
     - _EdgeWidth: 0.146
-    - _MANNULCONTROL: 1
+    - _MANNULCONTROL: 0
     - _ObjectScale: 2.09
     - _Spread: 1
-    - __dirty: 0
+    - __dirty: 1
     m_Colors:
     - _EdgeColor: {r: 0.2889349, g: 0.7830189, b: 0.2696244, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
