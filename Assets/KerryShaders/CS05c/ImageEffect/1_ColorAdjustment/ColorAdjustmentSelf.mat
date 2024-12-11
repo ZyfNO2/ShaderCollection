@@ -29,12 +29,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1.99
-    - _Contrast: 1.43
+    - _Brightness: 1
+    - _Contrast: 1
     - _HueShift: 0
-    - _Saturation: 1.38
-    - _VignetteIntensity: 1.548
-    - _VignetteRoundness: 4.2
+    - _Saturation: 1
+    - _VignetteIntensity: 1.893
+    - _VignetteRoundness: 4.29
     - _VignetteSmoothness: 5
     m_Colors: []
   m_BuildTextureStacks: []
