@@ -16,15 +16,17 @@ Shader /*ase_name*/ "Hidden/Templates/UnlitDoublePassUnlit" /*end*/
 		
 		Tags { "RenderType"="Opaque" }
 		LOD 100
-
-		/*ase_all_modules*/
 		
 		/*ase_pass*/
 		Pass
 		{
 			Name "Unlit"
-
+			Blend Off
+			ZWrite Off
+			ZTest LEqual
+			Cull Off
 			CGPROGRAM
+			
 
 			#ifndef UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
 			//only defining to not throw compilation error over Unity 5.5
@@ -100,11 +102,14 @@ Shader /*ase_name*/ "Hidden/Templates/UnlitDoublePassUnlit" /*end*/
 		}
 		/*ase_pass*/
 		Pass
-		{
+		 {
 			Name "Second"
-
+			Blend One One
+			ZWrite Off
+			ZTest LEqual
+			Cull Off
 			CGPROGRAM
-
+		
 			#ifndef UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
 			//only defining to not throw compilation error over Unity 5.5
 			#define UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input)

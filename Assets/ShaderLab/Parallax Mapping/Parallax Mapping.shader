@@ -102,9 +102,9 @@ Node;AmplifyShaderEditor.SaturateNode;57;304.0178,362.0096;Inherit;False;1;0;FLO
 Node;AmplifyShaderEditor.SaturateNode;58;312.5298,591.8391;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;56;426.0762,393.2109;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StandardSurfaceOutputNode;29;490.2126,-267.738;Float;False;True;-1;2;ASEMaterialInspector;0;0;Standard;FloatUV;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;False;;0;False;;False;0;False;;0;False;;False;0;Custom;0.5;True;True;0;True;Transparent;;Geometry;All;12;all;True;True;True;True;0;False;;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;2;15;10;25;False;0.5;True;0;0;False;;0;False;;0;0;False;;0;False;;0;False;;0;False;;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;True;Relative;0;;0;-1;-1;-1;0;False;0;0;False;;-1;0;False;;0;0;0;False;0.1;False;;0;False;;False;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
-Node;AmplifyShaderEditor.SimpleAddOpNode;59;204.2687,-179.8298;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;60;664.5908,364.4093;Inherit;False;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.ColorNode;61;584.2358,685.8295;Inherit;False;Property;_Color0;Color 0;9;1;[HDR];Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleAddOpNode;59;143.7929,-161.1112;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 WireConnection;11;1;40;0
 WireConnection;31;0;30;1
 WireConnection;31;1;30;4
@@ -142,9 +142,9 @@ WireConnection;56;0;57;0
 WireConnection;56;1;58;0
 WireConnection;29;0;59;0
 WireConnection;29;10;31;0
-WireConnection;59;0;11;0
-WireConnection;59;1;60;0
 WireConnection;60;0;56;0
 WireConnection;60;1;61;0
+WireConnection;59;0;11;0
+WireConnection;59;1;60;0
 ASEEND*/
-//CHKSM=5452F179D07EF05FD0FAD5CC2650B3826B0035B8
+//CHKSM=070E044A3A315C9A4840EBC6E5E273920112DB6B
