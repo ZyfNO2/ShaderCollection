@@ -46,6 +46,11 @@ namespace AmplifyShaderEditor
 		{
 			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "32139be9c1eb75640a847f011acf3bcf" );
 		}
+		[MenuItem( "Assets/Create/Amplify Shader/Legacy/Samples/DoublePassUnlit", false, 85 )]
+		public static void ApplyTemplateLegacySamplesDoublePassUnlit()
+		{
+			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "003dfa9c16768d048b74f75c088119d8" );
+		}
 		[MenuItem( "Assets/Create/Amplify Shader/Legacy/Unlit", false, 85 )]
 		public static void ApplyTemplateLegacyUnlit()
 		{
@@ -55,6 +60,11 @@ namespace AmplifyShaderEditor
 		public static void ApplyTemplateLegacyUnlitLightmap()
 		{
 			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "899e609c083c74c4ca567477c39edef0" );
+		}
+		[MenuItem( "Assets/Create/Amplify Shader/Templates/UnlitDoublePassUnlit", false, 85 )]
+		public static void ApplyTemplateTemplatesUnlitDoublePassUnlit()
+		{
+			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "48f96a7520efa5d438ba0cd616b8deb2" );
 		}
 		[MenuItem( "Assets/Create/Amplify Shader/UI/Default", false, 85 )]
 		public static void ApplyTemplateUIDefault()

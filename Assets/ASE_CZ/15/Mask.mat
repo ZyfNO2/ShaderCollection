@@ -36,8 +36,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 20a150fe6c3cc304396e3ed4ffc5471a, type: 3}
+        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
         m_Texture: {fileID: 2800000, guid: 9c68272ca1b92d8478f8a438cb945e52, type: 3}
@@ -49,13 +49,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NoiseIntensity: 0.3
+    - _NoiseIntensity: 1.7
     m_Colors:
-    - _AddColor: {r: 0.8679245, g: 0.7328231, b: 0.7328231, a: 0}
-    - _AddUVSpeed: {r: 4, g: 1, b: 0.2, a: 0.2}
+    - _AddColor: {r: 0.05660379, g: 0.011480957, b: 0.011480957, a: 0}
+    - _AddUVSpeed: {r: 1, g: 1, b: 0.2, a: 0.2}
     - _BackUVSpeed: {r: 3, g: 3, b: 0.2, a: 0.2}
     - _Frensel: {r: 5.3058734, g: 114.61881, b: 130.49623, a: 1}
-    - _FrenselColor: {r: 20.352283, g: 7.5841055, b: 7.5841055, a: 0}
+    - _FrenselColor: {r: 7.433823, g: 5.0844545, b: 5.0844545, a: 0}
     - _Fresnel: {r: 0, g: 1, b: 5, a: 0}
-    - _NoiseUVSpeed: {r: 1, g: 1, b: 0.2, a: 0.2}
+    - _NoiseUVSpeed: {r: 0.1, g: 0.1, b: 0.2, a: 0.2}
   m_BuildTextureStacks: []

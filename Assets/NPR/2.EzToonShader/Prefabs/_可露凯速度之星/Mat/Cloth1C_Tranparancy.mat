@@ -71,7 +71,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 1.315
+    - _OutlineWidth: 0.413
     - _Parallax: 0.02
     - _ShadowThreshold: -0.046
     - _SmoothnessTextureChannel: 0
