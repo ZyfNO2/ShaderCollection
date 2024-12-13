@@ -54,7 +54,7 @@ Material:
     - _RimPower: 3.21
     - _RimScale: 1.45
     - _UVDistort: 0.1
-    - __dirty: 0
+    - __dirty: 1
     m_Colors:
     - _Color0: {r: 0.3679245, g: 0.5781668, b: 1.471698, a: 0}
     - _InsideOffset: {r: 0.9056599, g: 0.3374864, b: 0.3374864, a: 0}
