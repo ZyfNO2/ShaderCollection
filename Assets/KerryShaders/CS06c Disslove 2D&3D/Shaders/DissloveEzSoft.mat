@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Gradient:
-        m_Texture: {fileID: 2800000, guid: 3c6ccf6f19fbafc4c9078a642ec01714, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5860134a0e9baef4b8d9dad5d31e5d4f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 30e5e49362d5aae4d91ba0ae634a707f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a4dd9d116a84b246b5b30692ea6008b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ChangeAmount: 0.294
+    - _ChangeAmount: 0.205
     - _Cutoff: 0.5
-    - _EdgeIntensity: 16.49
-    - _EdgeWidth: 0.456
+    - _EdgeIntensity: 10.8
+    - _EdgeWidth: 0.865
     - _MANNULCONTROL: 1
-    - _Spread: 0.357
+    - _Spread: 0.515
     - __dirty: 0
     m_Colors:
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 0}

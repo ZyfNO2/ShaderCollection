@@ -29,11 +29,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 30e5e49362d5aae4d91ba0ae634a707f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a4dd9d116a84b246b5b30692ea6008b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: 3c6ccf6f19fbafc4c9078a642ec01714, type: 3}
+        m_Texture: {fileID: 2800000, guid: 57555c0fa4dce3f4cbb0a85d1a65cca3, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -42,12 +42,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ChangeAmount: 0
+    - _ChangeAmount: 0.26
     - _Cutoff: 0.5
-    - _EdgeIntensity: 24.6
-    - _EdgeWidth: 0.238
+    - _EdgeIntensity: 10.8
+    - _EdgeWidth: 0.865
     - _MANNULCONTROL: 1
-    - _Spread: 0.297
+    - _Spread: 0.515
     - __dirty: 0
     m_Colors:
     - _EdgeColor: {r: 1.509434, g: 0.20647922, b: 0.20647922, a: 0}
