@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPR
-  m_Shader: {fileID: 4800000, guid: d840880b619373446991dc0fb7dcdf9b, type: 3}
+  m_Name: SkyBoxTest
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -71,28 +71,13 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 1
     - _Parallax: 0.02
-    - _RampSize: 0.111
-    - _RampSmooth: 0.13
-    - _RampStart: 0.596
-    - _RampStep: 2
-    - _RimSmooth: 0.089
-    - _RimThreshold: 0.582
     - _SmoothnessTextureChannel: 0
-    - _SpecIntensity: 0
-    - _SpecPow: 0.129
-    - _SpecSmooth: 0.106
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    - _OutLineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
