@@ -24,11 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ReflectTex:
-        m_Texture: {fileID: 8900000, guid: a9f053d430424adb925523ba78342596, type: 3}
+        m_Texture: {fileID: 8900000, guid: 25b1b23f725ba8449ba1c63a36654ea4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RefractTex:
-        m_Texture: {fileID: 8900000, guid: 61df6bd9e9b4844699368830d13b4f83, type: 2}
+        m_Texture: {fileID: 8900000, guid: 5bc8e8449ec1b480a904b93ec0ed0198, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -39,7 +39,7 @@ Material:
     - _RimPower: 0.52
     - _RimScale: 40.65
     m_Colors:
-    - _Color0: {r: 0.49056602, g: 0.40957633, b: 0.40957633, a: 0}
+    - _Color0: {r: 0.6698113, g: 0.23696156, b: 0.23696156, a: 0}
     - _Color1: {r: 0, g: 0, b: 0, a: 0}
-    - _RimeColor: {r: 0, g: 0, b: 0, a: 0}
+    - _RimeColor: {r: 0.41509432, g: 0.1938412, b: 0.1938412, a: 0}
   m_BuildTextureStacks: []

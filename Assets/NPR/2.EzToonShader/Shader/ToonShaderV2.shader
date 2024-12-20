@@ -44,7 +44,7 @@ Shader "GSST/ToonOpaqueV2"
             #pragma fragment frag
             #pragma multi_compile_fwdbase
 
-            #include "UnityCG.cginc"
+            //#include "UnityCG.cginc"
 
             #include "ToonShadingCommn.cginc"
             
@@ -63,7 +63,7 @@ Shader "GSST/ToonOpaqueV2"
             #pragma fragment frag
             #pragma multi_compile_fwdbase
 
-            #include "UnityCG.cginc"
+            //#include "UnityCG.cginc"
             #include "ToonShadingOutlineCommn.cginc"
             
             
