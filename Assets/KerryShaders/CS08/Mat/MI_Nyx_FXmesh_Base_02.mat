@@ -38,6 +38,6 @@ Material:
     - _NoiseInternsity: 2
     - __dirty: 0
     m_Colors:
-    - _Color0: {r: 1.6563722, g: 1.1087016, b: 0.41409305, a: 0}
+    - _Color0: {r: 0.4239282, g: 0.41626102, b: 1.6563722, a: 0}
     - _FloatSpeed: {r: 0.22, g: -0.23, b: 0, a: 0}
   m_BuildTextureStacks: []
