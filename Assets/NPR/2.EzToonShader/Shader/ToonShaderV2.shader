@@ -40,14 +40,14 @@ Shader "GSST/ToonOpaqueV2"
             Cull Back
             
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_fwdbase
-
-            //#include "UnityCG.cginc"
-
-            #include "ToonShadingCommn.cginc"
-            
+            // #pragma vertex vert
+            // #pragma fragment frag
+            // #pragma multi_compile_fwdbase
+            //
+            // //#include "UnityCG.cginc"
+            // 
+            // #include "ToonShadingCommn.cginc"
+            //
             
             ENDCG
         }
@@ -59,12 +59,12 @@ Shader "GSST/ToonOpaqueV2"
             Cull Front
             
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_fwdbase
-
-            //#include "UnityCG.cginc"
-            #include "ToonShadingOutlineCommn.cginc"
+            // #pragma vertex vert
+            // #pragma fragment frag
+            // #pragma multi_compile_fwdbase
+            //
+            // //#include "UnityCG.cginc"
+            // #include "ToonShadingOutlineCommn.cginc"
             
             
             ENDCG

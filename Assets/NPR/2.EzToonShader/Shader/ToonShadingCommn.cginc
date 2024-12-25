@@ -1,5 +1,6 @@
 #ifndef TOONSHADING_COMMON_CGINC
 #define TOONSHADING_COMMON_CGINC
+
 //避免重复包含
             //#include "UnityCG.cginc"
             sampler2D _MainTex;
@@ -51,6 +52,7 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 //将顶点的UV坐标通过_MainTex纹理矩阵进行变换，得到最终的UV坐标
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                //o.uv  = TRANSFORM_TEX
                 //物体空间的Normal需要转换
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
                 //顶点坐标到世界坐标
