@@ -84,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SlimeNormalNoise1:
-        m_Texture: {fileID: 2800000, guid: c33df331279fd444da15047ceafe5c50, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3862882999314ba499d178feca7869c0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture0:
