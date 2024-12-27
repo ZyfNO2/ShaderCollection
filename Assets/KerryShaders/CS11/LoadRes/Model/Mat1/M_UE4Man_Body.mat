@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_UE4Man_Body
+  m_Shader: {fileID: 4800000, guid: 35fba39e88600124ba8992ce6b1e5290, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ZWRITEMODE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlitchTex:
+        m_Texture: {fileID: 2800000, guid: 4bbf045a9f687084ea4bc84d53c39623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: 40a57aa63ff8fa74b94d8f399fcb19c9, type: 3}
+        m_Scale: {x: 1, y: 0.01}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 77b91526e481d164aa4fee6e8b5fc94c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScanLineTex:
+        m_Texture: {fileID: 2800000, guid: afb16754b93daf04187b10b438f7a250, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Scanline1:
+        m_Texture: {fileID: 2800000, guid: afb16754b93daf04187b10b438f7a250, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Scanline2:
+        m_Texture: {fileID: 2800000, guid: 4bbf045a9f687084ea4bc84d53c39623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScanlineTex:
+        m_Texture: {fileID: 2800000, guid: 4bbf045a9f687084ea4bc84d53c39623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WireFrame:
+        m_Texture: {fileID: 2800000, guid: 668fcaed21c1ad143a5b2782b04ad025, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0.92
+    - _BumpScale: 1
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _FliclCtrl: 1
+    - _FliclCtrl1: 0.888
+    - _FliclCtrl2: 0.888
+    - _GlicthTilling: 10
+    - _GlitchFreq: 47.5
+    - _GlitchHardmess: 0.76
+    - _GlitchSpeed: -15.81
+    - _GlitchWidth: 0.5
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+    - _Line1Alpha: 0.3
+    - _Line1Freq: 50
+    - _Line1Hardmess: 0.8
+    - _Line1Speed: 0.8
+    - _Line1Width: 1
+    - _Line2Alpha: 0.3
+    - _Line2Freq: 50
+    - _Line2Hardmess: 0.8
+    - _Line2Speed: 0.8
+    - _Line2Width: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RimBias: 0
+    - _RimPower: 2
+    - _RimScale: 2
+    - _ScanSpeed: 0
+    - _ScanTilling: 5
+    - _ScanlineInvert: 0.77
+    - _ScanlinePower: 2.24
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Tilling: 1
+    - _UVSec: 0
+    - _WireFrameIntensity: 0.21
+    - _ZWrite: 1
+    - _ZWriteMode: 1
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 0.2158605, g: 0.2158605, b: 0.2158605, a: 1}
+    - _Color0: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Line1Color: {r: 1.3618543, g: 1.0645255, b: 3.0914989, a: 0.05490196}
+    - _MainColor: {r: 0.2247059, g: 0.5243137, b: 1.4980392, a: 0.05490196}
+    - _ScanlineVertexOffset: {r: 2, g: 0, b: 0, a: 0}
+    - _VertexOffset: {r: 2, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

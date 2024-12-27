@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HologramDepthMask
+  m_Shader: {fileID: 4800000, guid: 7499b942297d4354d8bf44b204e15425, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ZWRITEMODE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 77b91526e481d164aa4fee6e8b5fc94c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WireFrame:
+        m_Texture: {fileID: 2800000, guid: 668fcaed21c1ad143a5b2782b04ad025, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0.92
+    - _FlickControl: 0
+    - _GlitchHardness: 1
+    - _GlitchSpeed: -15.81
+    - _Line1Alpha: 0.3
+    - _Line1Hardness: 1
+    - _Line1Speed: 0.8
+    - _Line2Alpha: 0.3
+    - _Line2Hardness: 1
+    - _Line2Speed: 0.8
+    - _RandomTilling: 0
+    - _RimBias: 0
+    - _RimPower: 2
+    - _RimScale: 2
+    - _WireFrameIntensity: 0.21
+    - _ZWriteMode: 1
+    - __dirty: 0
+    m_Colors:
+    - _MainColor: {r: 0.2247059, g: 0.5243137, b: 1.498039, a: 0.05490196}
+    - _RandomVertexOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ScanlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ScanlineVertexOffset: {r: 2, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

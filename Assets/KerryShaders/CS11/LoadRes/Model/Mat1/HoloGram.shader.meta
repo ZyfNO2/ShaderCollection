@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 35fba39e88600124ba8992ce6b1e5290
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Scanline1: {fileID: 2800000, guid: 4bbf045a9f687084ea4bc84d53c39623, type: 3}
+  - _Scanline2: {fileID: 2800000, guid: 4bbf045a9f687084ea4bc84d53c39623, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
