@@ -2,37 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Body
-  m_Shader: {fileID: 4800000, guid: 341e963f73ac0e64f96177f01e677ba9, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Skybox
+  m_Shader: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f7549f6cf82871c439168b7599da3968, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CompMask:
-        m_Texture: {fileID: 2800000, guid: a7f745220fb33f946a159d308f6c7308, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -47,10 +34,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmissTex:
-        m_Texture: {fileID: 2800000, guid: 668fcaed21c1ad143a5b2782b04ad025, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,10 +46,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 77b91526e481d164aa4fee6e8b5fc94c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -75,52 +54,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _texcoord:
+    - _Tex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DissloveAmount: -0.5
-    - _DissloveEdgeOffset: 2.34
-    - _DissloveOffset: 0
-    - _DissloveSpread: 2
     - _DstBlend: 0
-    - _Float0: 0.4
-    - _Float1: -2.04
+    - _Exposure: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _MetallicAdjust: 0.161
     - _Mode: 0
-    - _NoiseScale: 22.97
     - _OcclusionStrength: 1
-    - _OffsetIntensity: 18.49
     - _Parallax: 0.02
-    - _RimCtrl: 0.643
-    - _RimIntensity: 1
-    - _SmoothnessAdjust: 0.195
+    - _Rotation: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _VertexEffectOffset: 0.15
-    - _VertexEffectSpread: 4.02
-    - _VertexOffset: 0.81
-    - _VertexSpread: 2
-    - _VertexSpread1: 1
     - _ZWrite: 1
-    - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeEmissColor: {r: 0.4896344, g: 1.1772554, b: 1.5969614, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NoiseScale: {r: 15, g: 1, b: 1, a: 0}
-    - _RimColor: {r: 0.56737274, g: 0.6494382, b: 1.6037736, a: 0}
-    - _Vector0: {r: 0, g: 1, b: 0, a: 0}
-    - _VertexOffsetNoise: {r: 10, g: 10, b: 10, a: 0}
-  m_BuildTextureStacks: []
+    - _Tint: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 0.5}

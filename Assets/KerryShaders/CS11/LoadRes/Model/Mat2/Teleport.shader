@@ -408,7 +408,7 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;133;-447.7041,-1475.854;Inherit;Fa
 Node;AmplifyShaderEditor.RegisterLocalVarNode;122;173.8042,-2001.951;Inherit;False;RimEmiss;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.ColorNode;123;-169.5594,-1894.625;Inherit;False;Property;_RimColor;RimColor;18;1;[HDR];Create;True;0;0;0;False;0;False;0,0,0,0;0.5673727,0.6494382,1.603774,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;121;-477.6627,-2045.552;Inherit;False;Property;_RimIntensity;RimIntensity;16;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SamplerNode;131;-863.2377,-1294.715;Inherit;True;Property;_EmissTex;EmissTex;19;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;131;-863.2377,-1294.715;Inherit;True;Property;_EmissTex;EmissTex;19;0;Create;True;0;0;0;False;0;False;-1;None;668fcaed21c1ad143a5b2782b04ad025;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.ClampOpNode;119;-510.6361,-1795.216;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;120;-140.2928,-2099.511;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;132;-299.8054,-1814.85;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -504,4 +504,4 @@ WireConnection;120;2;123;0
 WireConnection;132;0;119;0
 WireConnection;132;1;133;0
 ASEEND*/
-//CHKSM=318A6D2A263035344069D5BD983E531E3B597E23
+//CHKSM=2787FEE83DC844DD696A2CE6C2C815A5A6787DEB
