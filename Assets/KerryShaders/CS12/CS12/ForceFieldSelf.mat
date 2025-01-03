@@ -95,7 +95,7 @@ Material:
     - _RimPower: 6
     - _RimScale: 0.37
     - _Size: 4.44
-    - __dirty: 0
+    - __dirty: 1
     m_Colors:
     - _DisslovePoint: {r: 0, g: 9.7, b: 0, a: 0}
     - _EmissColor: {r: 0.621796, g: 0.63600206, b: 0.8396226, a: 0}
