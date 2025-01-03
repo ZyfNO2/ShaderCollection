@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
+
+
 
 [ExecuteInEditMode()]
-public class ForceField : MonoBehaviour {
+public class ForceFieldSelf : MonoBehaviour
+{
     public ParticleSystem ps;
     public string triggerTag = "ForceField";
     public float clicksPerSecond = 0.1f;
@@ -11,8 +14,7 @@ public class ForceField : MonoBehaviour {
     private ParticleSystem.Particle[] particles;
     private Vector4[] positions;
     private float[] sizes;
-
-
+    
     void DoRayCast()
     {
         RaycastHit hitInfo;
@@ -25,10 +27,10 @@ public class ForceField : MonoBehaviour {
                 ps.transform.position = hitInfo.point;
                 ps.Emit(1);
             }
-        }
+        } 
     }
-	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         clickTimer += Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
@@ -38,7 +40,9 @@ public class ForceField : MonoBehaviour {
                 DoRayCast();
             }
         }
-
+        
+        // Shader.SetGlobalVector("HitPosition",transform.position);
+        // Shader.SetGlobalFloat("HitSize",transform.lossyScale.x);
         var psmain = ps.main;
         psmain.maxParticles = AffectorAmount;
         particles = new ParticleSystem.Particle[AffectorAmount];
@@ -47,11 +51,12 @@ public class ForceField : MonoBehaviour {
         ps.GetParticles(particles);
         for (int i = 0; i < AffectorAmount; i++)
         {
-            positions[i] = particles[i].position;
-            sizes[i] = particles[i].GetCurrentSize(ps);
+        positions[i] = particles[i].position;
+        sizes[i] = particles[i].GetCurrentSize(ps);
         }
         Shader.SetGlobalVectorArray("HitPosition", positions);
         Shader.SetGlobalFloatArray("HitSize", sizes);
         Shader.SetGlobalFloat("AffectorAmount", AffectorAmount);
+        
     }
 }
