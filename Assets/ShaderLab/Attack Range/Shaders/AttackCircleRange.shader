@@ -58,7 +58,6 @@ Shader "LSQ/Technology/ProjectorAndDecal/AttackCircleRange"
 			{
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
-				//用projtector求UV  将自身变换到projtector这个矩阵中
 				o.uvShadow = mul(unity_Projector, v.vertex);
 				return o;
 			}
@@ -81,24 +80,23 @@ Shader "LSQ/Technology/ProjectorAndDecal/AttackCircleRange"
 				float len2 = uv.x * uv.x + uv.y * uv.y;
 				float range;
 
-				//最小范围			
+				//��С��Χ			
 				if (len2 < _MinRange)
 				{
 					range = 0;
 				}
 				else
 				{
-					//角度
+					//�Ƕ�
 					const float PI = 3.14159;
 					float angle = atan2(uv.y, uv.x) / PI * 180;
 					range = 1 - step(smoothstep(_AttackAngle * 0.5, 0, angle) - smoothstep(0, -_AttackAngle * 0.5, angle), 0);
 				}
 
-				//投影
-				//如果不遮罩，就会覆盖全图
+				//ͶӰ
 				fixed fullMask = tex2D(_ShadowTex, i.uvShadow.xy / i.uvShadow.w).a;
 				//fixed fullMask = tex2Dproj(_ShadowTex, UNITY_PROJ_COORD(i.uvShadow)).a;
-				//去除边缘拉伸
+				//ȥ����Ե����
 				const float BORDER = 1e-5;
 				if (i.uvShadow.x / i.uvShadow.w < BORDER
 				|| i.uvShadow.x / i.uvShadow.w > 1 - BORDER  
@@ -108,10 +106,10 @@ Shader "LSQ/Technology/ProjectorAndDecal/AttackCircleRange"
                     fullMask = 0;
                 }
 
-				//最外圈
+				//����Ȧ
 				float alpha = pow(len, _Power) * fullMask * _Strength;
 
-				//中心波
+				//���Ĳ�
 				float centerWave = 0;
 				if(alpha > 0)
 				{
