@@ -27,10 +27,6 @@ Material:
         m_Texture: {fileID: 2800000, guid: 952d9876a3110464a8da4ae30565c543, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DetialMap:
-        m_Texture: {fileID: 2800000, guid: d6b0c2303945983458ce989f2d702696, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _ILM:
         m_Texture: {fileID: 2800000, guid: 4da5a89cf075fe344a972a145e0fb8c2, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -49,14 +45,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Outline: 1.01
-    - _OutlineWidth: 7
-    - _SpecSize: 0.785
-    - _Spec_Ctrl: 0.75
+    - _SpecSize: 0.743
+    - _Spec_Ctrl: 0.99
     - _Spec_ctrl: -1.55
     - _ToonHardness: 50
-    - _ToonThreshold: 0.151
-    m_Colors:
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.3490566, g: 0.26508543, b: 0.32853028, a: 1}
+    - _ToonThreshold: 0.2
+    m_Colors: []
   m_BuildTextureStacks: []
