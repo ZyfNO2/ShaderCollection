@@ -7,6 +7,8 @@ Shader "Unlit/Toon"
         _ILMap ("ILMap", 2D) = "gray" {}
         _ToonThreshold ("ToonThreshold", Range(0, 1)) = 0.5
         _ToonHardness ("ToonHardness", Float) = 20
+        _SpecSize ("SpecSize(Range)）", Range(0,1)) = 0.1
+        _Spec_Ctrl("SpecCtrl(Intensity)", Float) = 2
     }
     SubShader
     {
@@ -46,6 +48,8 @@ Shader "Unlit/Toon"
             sampler2D _ILMap;
             float _ToonThreshold;
             float _ToonHardness;
+            float _SpecSize;
+            float _Spec_Ctrl;
             
             
 
@@ -67,19 +71,29 @@ Shader "Unlit/Toon"
 
                 float3 normalDir = normalize(i.normal_world);
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+                float3 viewDir = normalize(_WorldSpaceCameraPos - i.pos_world);
                 
                 // sample the texture
                 half4  base_map = tex2D(_BaseMap, uv1);
                 half3 base_color = base_map.rgb;//亮部颜色
+
+
+                
                 half4  sss_map = tex2D(_SSSMap, uv1);
                 half3 sss_color = sss_map.rgb;//暗部颜色
+
+
+                
                 half4  ilm_map = tex2D(_ILMap, uv1);
                 half3 ilm_color = ilm_map.rgb;
                 float spec_intensity = ilm_map.r;//高光强度
-                float diffuse_control = ilm_map.g * 2 - 1;//光照偏移
+                float diffuse_control = (ilm_map.g * 2) - 1;//光照偏移
+                //float diffuse_control = ilm_map.g;//光照偏移
                 float spec_size = ilm_map.b;//高光形状
                 float inner_line = ilm_map.a;//内描线
 
+
+                
                 //Vertex Color
                 float ao = i.vertex_color.r;
                 
@@ -89,11 +103,25 @@ Shader "Unlit/Toon"
                 half lambert_term = half_lambert * ao + diffuse_control;
                 half toon_diffuse = saturate((lambert_term - _ToonThreshold) * _ToonHardness);
                 half3 final_diffuse =lerp(sss_color,base_color,toon_diffuse);
-    
-                //spec
 
                 
-                return float4(final_diffuse,1);
+                //spec Not NdotH
+                half NdotV = (dot(normalDir,viewDir) + 1.0) * 0.5;
+               
+                half spec_term = NdotV * 0.5 + 0.5;
+                //spec_term = (half_lambert * 0.5 + spec_term * 0.5) ;
+                spec_term = (half_lambert * 0.9 + spec_term * 0.1) ;//高光来源
+                half toon_spec = saturate(spec_term - (_Spec_Ctrl - spec_size * _SpecSize)) * 500;//这里放个参数好点捏
+                
+                half3 final_spec = toon_spec * base_color * spec_intensity;
+
+
+                half3 final_color = final_diffuse + final_spec;
+
+
+                return half4(final_color,1);
+                //return float4(final_color,1);
+                //return float4(final_diffuse,1);
             }
             ENDCG
         }
