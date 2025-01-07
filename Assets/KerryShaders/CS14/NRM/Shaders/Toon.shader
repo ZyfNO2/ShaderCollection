@@ -11,7 +11,11 @@ Shader "Unlit/Toon"
         
         _SpecColor ("Specular Color", Color) = (1,1,1,1)
         _SpecSize ("SpecSize(Range)）", Range(0,1)) = 0.1
-        _Spec_Ctrl("SpecCtrl(Intensity)", Float) = 2
+        _SpecCtrl("SpecCtrl(Intensity)", Float) = 2
+        
+        _RimLightDir ("RimLightDir", Vector) = (1,0,-1,0)
+        _RimLightColor ( "RimLightColor", Color) = (1,1,1,1)
+        
         
         _OutlineWidth ("OutlineWidth", Float) = 5
         _OutlineZbias ("OutlineZbias", Float) = 0
@@ -21,7 +25,7 @@ Shader "Unlit/Toon"
     {
         Tags { "RenderType"="ForwardBase" }
         LOD 100
-
+        //toon shader
         Pass
         {
             CGPROGRAM
@@ -48,6 +52,7 @@ Shader "Unlit/Toon"
                 float3 pos_world : TEXCOORD1;
                 float3 normal_world : TEXCOORD2;
                 float4 vertex_color : TEXCOORD3;
+                //SHADOW_COORDS(4)
             };
 
             sampler2D _BaseMap;
@@ -58,8 +63,9 @@ Shader "Unlit/Toon"
             float _ToonHardness;
             float4 _SpecColor;
             float _SpecSize;
-            float _Spec_Ctrl;
-            
+            float _SpecCtrl;
+            float4 _RimLightDir;
+            float4 _RimLightColor;
             
 
             v2f vert (appdata v)
@@ -70,6 +76,7 @@ Shader "Unlit/Toon"
                 o.normal_world = UnityObjectToWorldNormal(v.normal);
                 o.uv = float4(v.texcoord0,v.texcoord1);
                 o.vertex_color = v.color;
+                TRANSFER_SHADOW(o)
                 return o;
             }
 
@@ -85,19 +92,18 @@ Shader "Unlit/Toon"
                 // sample the texture
                 half4 base_map = tex2D(_BaseMap, uv1);
                 half3 base_color = base_map.rgb;//亮部颜色
-
+                half base_mask = base_map.a;//亮部遮罩
 
                 
                 half4  sss_map = tex2D(_SSSMap, uv1);
                 half3 sss_color = sss_map.rgb;//暗部颜色
-
+                half sss_alpha = sss_map.a;//边缘光强度的控制
 
                 
                 half4  ilm_map = tex2D(_ILMap, uv1);
-                half3 ilm_color = ilm_map.rgb;
+                //half3 ilm_color = ilm_map.rgb;
                 float spec_intensity = ilm_map.r;//高光强度
                 float diffuse_control = (ilm_map.g * 2) - 1;//光照偏移
-                //float diffuse_control = ilm_map.g;//光照偏移
                 float spec_size = ilm_map.b;//高光形状
                 float inner_line = ilm_map.a;//内描线
 
@@ -105,11 +111,16 @@ Shader "Unlit/Toon"
                 
                 //Vertex Color
                 float ao = i.vertex_color.r;
+
+                //shadow
+                //float atten = SHADOW_ATTENUATION(i);
+                float atten = lerp(1,SHADOW_ATTENUATION(i),i.vertex_color.g) ;
+
                 
                 //diffuse
                 half NdotL = dot(normalDir, lightDir);
                 half half_lambert = (NdotL + 1) * 0.5;
-                half lambert_term = half_lambert * ao + diffuse_control;
+                half lambert_term = half_lambert * ao * atten + diffuse_control;
                 half toon_diffuse = saturate((lambert_term - _ToonThreshold) * _ToonHardness);
                 half3 final_diffuse =lerp(sss_color,base_color,toon_diffuse);
 
@@ -118,10 +129,9 @@ Shader "Unlit/Toon"
                 half NdotV = (dot(normalDir,viewDir) + 1.0) * 0.5;
                
                 half spec_term = NdotV * 0.5 + 0.5;
-                //spec_term = (half_lambert * 0.5 + spec_term * 0.5) ;
                 spec_term = (half_lambert * 0.2 + spec_term * 0.2) ;//高光来源
-                half toon_spec = saturate(spec_term - (_Spec_Ctrl - spec_size * _SpecSize)) * 500;//这里放个参数好点捏
-                half3 spec_color = (_SpecColor.xyz + base_color) * 0.5;
+                half toon_spec = saturate(spec_term - (_SpecCtrl * -0.05 - spec_size * _SpecSize)) * 500;//这里放个参数好点捏
+                half3 spec_color = (_SpecColor.rgb + base_color) * 0.5;
                 half3 final_spec = (toon_spec * spec_color * spec_intensity);
                 
                 //outline
@@ -130,14 +140,18 @@ Shader "Unlit/Toon"
                 detial_color = lerp(base_color*0.2,float3(1,1,1),detial_color);
                 half3 final_line = inner_line_color * inner_line_color * detial_color   ;
                 
-
-
-                
-                half3 final_color = (final_diffuse + final_spec) * final_line;
+                //fersnel color
+                half3 lightDir_rim = normalize(mul((float3x3)unity_MatrixInvV,_RimLightDir.xyz));
+                half NdotL_rim = (dot(normalDir,lightDir_rim) + 1) * 0.5;
+                half rimlight_term = NdotL_rim + diffuse_control;
+                half toon_rim = saturate((rimlight_term - _ToonThreshold) * 20);
+                half3 rim_color = (_RimLightColor.rgb +  base_color) * 0.5  * sss_alpha;
+                half3 final_rimlight = toon_rim * rim_color * base_mask * toon_diffuse;
+                    
+                half3 final_color = (final_diffuse + final_spec + final_rimlight) * final_line;
                 final_color = sqrt(max(exp2(log2(max(final_color,0))*2.2),0));//color adjust
                 return half4(final_color,1);
-                //return float4(final_color,1);
-                //return float4(final_diffuse,1); 
+                 
             }
             ENDCG
         }
@@ -151,7 +165,6 @@ Shader "Unlit/Toon"
             #pragma fragment frag
            
             #pragma multi_compile_forwardbase
-            #include "UnityCG.cginc"
             #include "AutoLight.cginc"
 
             struct appdata
@@ -186,7 +199,7 @@ Shader "Unlit/Toon"
                 v2f o;
                
                 float3 pos_view = mul(UNITY_MATRIX_MV, v.vertex);
-                float normal_world = UnityObjectToWorldNormal(v.normal);
+                //float normal_world = UnityObjectToWorldNormal(v.normal);
                 float3 outline_dir = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, v.normal));
               
                 outline_dir.z += _OutlineZbias * (1 - v.color.b);
@@ -216,4 +229,7 @@ Shader "Unlit/Toon"
         }
 
     }
+
+    Fallback "Diffuse"
+
 }

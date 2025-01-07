@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 952d9876a3110464a8da4ae30565c543, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DetialMap:
+        m_Texture: {fileID: 2800000, guid: d6b0c2303945983458ce989f2d702696, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ILM:
         m_Texture: {fileID: 2800000, guid: 4da5a89cf075fe344a972a145e0fb8c2, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -45,10 +49,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _SpecSize: 0.743
+    - _OutlineWidth: 5
+    - _OutlineZbias: 0
+    - _SpecCtrl: -15.7
+    - _SpecSize: 0.8
     - _Spec_Ctrl: 0.99
     - _Spec_ctrl: -1.55
     - _ToonHardness: 50
-    - _ToonThreshold: 0.2
-    m_Colors: []
+    - _ToonThreshold: 0.282
+    m_Colors:
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimLightColor: {r: 0.4588259, g: 0.12028301, b: 0.5, a: 1}
+    - _RimLightDir: {r: 0, g: 1, b: -3, a: 0}
+    - _SpecColor: {r: 0.8207547, g: 0.15098791, b: 0.15098791, a: 1}
   m_BuildTextureStacks: []

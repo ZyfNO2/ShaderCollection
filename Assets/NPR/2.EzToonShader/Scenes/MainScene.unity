@@ -97,7 +97,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 9a6288abfde6d6946a3139875c78e898, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 57b32f340a6606e4f9ab9a7e3773c084, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 6632e5bab48108e458c1decf42886f12, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -152,7 +152,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.8867924, g: 0.004182993, b: 0.004182993, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 12.34
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -799,8 +799,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18001056, y: 0.7664919, z: -0.2436999, w: 0.5663009}
-  m_LocalPosition: {x: -0.48000574, y: 1.5894154, z: 0.21196884}
+  m_LocalRotation: {x: -0.0022235068, y: -0.9906899, z: -0.13516304, w: 0.016111964}
+  m_LocalPosition: {x: 0.0004439354, y: 1.0286294, z: 0.57719636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -816,8 +816,8 @@ AimConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_RotationAtRest: {x: 35.27269, y: 107.08304, z: -0.004329452}
-  m_RotationOffset: {x: -17.69247, y: -5.6616645, z: 5.5501943}
+  m_RotationAtRest: {x: -15.538218, y: -178.13693, z: 0.0029810166}
+  m_RotationOffset: {x: -29.260988, y: 2.0178897, z: -0.49498478}
   m_AimVector: {x: 0, y: 0, z: 1}
   m_UpVector: {x: 0, y: 1, z: 0}
   m_WorldUpVector: {x: 0, y: 1, z: 0}
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -1042,7 +1042,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.38
+  m_Intensity: 0.62
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
