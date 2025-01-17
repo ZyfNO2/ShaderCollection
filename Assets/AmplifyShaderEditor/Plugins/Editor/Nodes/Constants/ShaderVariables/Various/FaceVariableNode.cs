@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Face", "Primitive", "Indicates whether the rendered surface is facing the camera (1), or facing away from the camera (0)" )]
+	[NodeAttributes( "Face", "Vertex Data", "Indicates whether the rendered surface is facing the camera (1), or facing away from the camera(-1)" )]
 	public class FaceVariableNode : ParentNode
 	{
 		public const string FaceOnVertexWarning = "Face type nodes generates extra instructions when used on vertex ports since it needs to manually calculate the value";
@@ -47,17 +47,9 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				if ( dataCollector.CurrentCanvasMode == NodeAvailability.TemplateShader )
-				{
-					dataCollector.AddToInput( UniqueId, SurfaceInputs.FRONT_FACING );
-				}
-				else
-				{
-					dataCollector.AddToInput( UniqueId, SurfaceInputs.FRONT_FACING_VFACE );
-				}
-
+				dataCollector.AddToInput( UniqueId, SurfaceInputs.VFACE );
 				string variable = ( dataCollector.PortCategory == MasterNodePortCategory.Vertex ) ? Constants.VertexShaderOutputStr : Constants.InputVarStr;
-				return variable + "." + Constants.IsFrontFacingVariable;
+				return variable + "." + Constants.VFaceVariable;
 			}
 		}
 	}

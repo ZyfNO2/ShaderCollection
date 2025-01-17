@@ -318,7 +318,7 @@ namespace AmplifyShaderEditor
 					{
 						if( m_inputCount > m_lastInputCount )
 						{
-							UndoUtils.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoCreateDynamicPortId );
+							Undo.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoCreateDynamicPortId );
 							RecordObject( Constants.UndoCreateDynamicPortId );
 
 							AddInputPort( m_mainDataType, false, ( ( char ) ( 'A' + m_inputCount - 1 ) ).ToString() );
@@ -401,7 +401,7 @@ namespace AmplifyShaderEditor
 			{
 				if( recordUndo )
 				{
-					UndoUtils.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoDeleteDynamicPortId );
+					Undo.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoDeleteDynamicPortId );
 					RecordObject( Constants.UndoDeleteDynamicPortId );
 				}
 

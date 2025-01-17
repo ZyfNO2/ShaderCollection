@@ -255,7 +255,11 @@ namespace AmplifyShaderEditor
 		}
 		public override string GetPropertyValue()
 		{
+#if UNITY_2018_1_OR_NEWER
 			string toggleAttribute = ( m_generateKeyword ) ? "[Toggle]":"[ToggleUI]";
+#else
+			string toggleAttribute = ( m_generateKeyword ) ? "[Toggle]": "[NoKeywordToggle]";
+#endif
 			return PropertyAttributes + toggleAttribute + m_propertyName + "(\"" + m_propertyInspectorName + "\", Float) = " + m_currentSelectedInput;
 		}
 

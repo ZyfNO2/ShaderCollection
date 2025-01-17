@@ -12,9 +12,7 @@ namespace AmplifyShaderEditor
 		white,
 		black,
 		gray,
-		bump,
-		linearGrey,
-        red
+		bump
 	}
 
 	public enum TextureType
@@ -325,6 +323,17 @@ namespace AmplifyShaderEditor
 					m_textureType = typeof( Cubemap );
 				}
 				break;
+#if !UNITY_2018_1_OR_NEWER
+				// Disabling Substance Deprecated warning
+#pragma warning disable 0618
+				case TextureType.ProceduralTexture:
+				{
+					m_textureType = typeof( ProceduralTexture );
+				}
+				break;
+#pragma warning restore 0618
+#endif
+
 			}
 		}
 
@@ -496,8 +505,11 @@ namespace AmplifyShaderEditor
 			if( importer != null )
 			{
 
+#if UNITY_5_5_OR_NEWER
 				m_isNormalMap = importer.textureType == TextureImporterType.NormalMap;
-
+#else
+				m_isNormalMap = importer.normalmap;
+#endif
 				if( writeDefault && !UIUtils.IsLoading )
 				{
 					if( m_defaultTextureValue == TexturePropertyValues.bump && !m_isNormalMap )
@@ -527,6 +539,15 @@ namespace AmplifyShaderEditor
 			{
 				ConfigTextureData( TextureType.Cube );
 			}
+#if !UNITY_2018_1_OR_NEWER
+			// Disabling Substance Deprecated warning
+#pragma warning disable 0618
+			else if( ( texture as ProceduralTexture ) != null )
+			{
+				ConfigTextureData( TextureType.ProceduralTexture );
+			}
+#pragma warning restore 0618
+#endif
 
 			ConfigureInputPorts();
 			ConfigureOutputPorts();
@@ -992,7 +1013,11 @@ namespace AmplifyShaderEditor
 		{
 			m_excludeUniform = false;
 			ParentGraph outsideGraph = UIUtils.CurrentWindow.OutsideGraph;
+#if UNITY_2018_1_OR_NEWER
 			if( outsideGraph.SamplingMacros || m_currentType == TextureType.Texture2DArray )
+#else
+			if( ( outsideGraph.SamplingMacros && !outsideGraph.IsStandardSurface ) || m_currentType == TextureType.Texture2DArray )
+#endif
 			{
 				if( outsideGraph.IsSRP )
 				{
@@ -1006,7 +1031,12 @@ namespace AmplifyShaderEditor
 				}
 				else if( Constants.TexDeclarationStandardMacros.ContainsKey( m_currentType ) )
 				{
-					dataName = GeneratorUtils.GetPropertyDeclaraction( PropertyName, m_currentType, ";" );
+#if !UNITY_2018_1_OR_NEWER
+					if( m_currentType == TextureType.Texture2DArray && outsideGraph.IsStandardSurface )
+						dataName = string.Format( Constants.TexDeclarationStandardMacros[ m_currentType ], PropertyName );
+					else
+#endif
+						dataName = GeneratorUtils.GetPropertyDeclaraction( PropertyName, m_currentType, ";" );
 					dataType = string.Empty;
 					fullValue = true;
 					return true;
@@ -1014,6 +1044,7 @@ namespace AmplifyShaderEditor
 			}
 
 			//TODO: this is a hack and needs to be properly fixed
+#if UNITY_5_6_OR_NEWER
 			if( PropertyName == "_CameraDepthTexture" )
 			{
 				if( m_containerGraph.ParentWindow.OutsideGraph.IsSRP )
@@ -1028,7 +1059,7 @@ namespace AmplifyShaderEditor
 					return true;
 				}
 			}
-
+#endif
 			dataType = UIUtils.TextureTypeToCgType( m_currentType );
 			dataName = m_propertyName;
 			return true;

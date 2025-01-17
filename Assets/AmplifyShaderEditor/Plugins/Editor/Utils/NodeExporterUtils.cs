@@ -53,7 +53,7 @@ namespace AmplifyShaderEditor
 		public NodeExporterUtils( AmplifyShaderEditorWindow window )
 		{
 			m_window = window;
-			UndoUtils.RegisterUndoRedoCallback( OnUndoRedoPerformed );
+			Undo.undoRedoPerformed += OnUndoRedoPerformed;
 		}
 
 		public void OnUndoRedoPerformed()
@@ -224,7 +224,7 @@ namespace AmplifyShaderEditor
 						{
 							Debug.Log( "Performing Undo" );
 							m_undoState = DebugUndoNodeState.WaitFrameUndo;
-							UndoUtils.PerformUndo();
+							Undo.PerformUndo();
 						}
 						break;
 						case DebugUndoNodeState.WaitFrameUndo: { } break;

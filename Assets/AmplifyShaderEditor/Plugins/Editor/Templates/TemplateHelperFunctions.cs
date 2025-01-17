@@ -42,7 +42,7 @@ namespace AmplifyShaderEditor
 		TEXCOORD15,
 		NORMAL,
 		TANGENT,
-		SV_IsFrontFacing,
+		VFACE,
 		SV_VertexID,
 		SV_PrimitiveID,
 		SV_InstanceID,
@@ -292,7 +292,7 @@ namespace AmplifyShaderEditor
 
 			StencilBufferId = string.Empty;
 
-			Reference = 0;
+			Reference = 255;
 			ReferenceInline = string.Empty;
 
 			ReadMask = 255;
@@ -301,29 +301,29 @@ namespace AmplifyShaderEditor
 			WriteMask = 255;
 			WriteMaskInline = string.Empty;
 
-			ComparisonFront = string.Empty;
+			ComparisonFront = "always";
 			ComparisonFrontInline = string.Empty;
 
-			PassFront = string.Empty;
+			PassFront = "keep";
 			PassFrontInline = string.Empty;
 
-			FailFront = string.Empty;
+			FailFront = "keep";
 			FailFrontInline = string.Empty;
 
-			ZFailFront = string.Empty;
+			ZFailFront = "keep";
 			ZFailFrontInline = string.Empty;
 
 
-			ComparisonBack = string.Empty;
+			ComparisonBack = "always";
 			ComparisonBackInline = string.Empty;
 
-			PassBack = string.Empty;
+			PassBack = "keep";
 			PassBackInline = string.Empty;
 
-			FailBack = string.Empty;
+			FailBack = "keep";
 			FailBackInline = string.Empty;
 
-			ZFailBack = string.Empty;
+			ZFailBack = "keep";
 			ZFailBackInline = string.Empty;
 		}
 
@@ -582,7 +582,7 @@ namespace AmplifyShaderEditor
 			{TemplateSemantics.POSITION			,"ase_position"},
 			{TemplateSemantics.SV_POSITION		,"ase_sv_position"},
 			{TemplateSemantics.TANGENT			,"ase_tangent"},
-			{TemplateSemantics.SV_IsFrontFacing			,"ase_vface"},
+			{TemplateSemantics.VFACE			,"ase_vface"},
 			{TemplateSemantics.SV_VertexID		,"ase_vertexId"},
 			{TemplateSemantics.SV_InstanceID    ,"ase_instanceId"},
 			{TemplateSemantics.SV_PrimitiveID   ,"ase_primitiveId"},
@@ -882,12 +882,17 @@ namespace AmplifyShaderEditor
 		public static readonly string HDPBRTag = "UNITY_MATERIAL_LIT";
 		public static readonly Dictionary<string, TemplateSRPType> TagToRenderPipeline = new Dictionary<string, TemplateSRPType>()
 		{
-			{ "UniversalPipeline",TemplateSRPType.URP },
-			{ "LightweightPipeline",TemplateSRPType.URP },
-			{ "HDRenderPipeline",TemplateSRPType.HDRP }
+			{ "UniversalPipeline",TemplateSRPType.Lightweight },
+			{ "LightweightPipeline",TemplateSRPType.Lightweight },
+			{ "HDRenderPipeline",TemplateSRPType.HD }
 		};
+#if UNITY_2018_3_OR_NEWER
 		public static string CoreColorLib = "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl";
 		public static string CoreCommonLib = "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl";
+#else
+		public static string CoreCommonLib = "CoreRP/ShaderLibrary/Common.hlsl";
+		public static string CoreColorLib = "CoreRP/ShaderLibrary/Color.hlsl";
+#endif
 
 		public static string PragmaOnlyRendersPattern = @"#pragma\s+only_renderers\s+([\w .]*)";
 		public static string PragmaExcludeRendersPattern = @"#pragma\s+exclude_renderers\s+([\w .]*)";
@@ -928,8 +933,6 @@ namespace AmplifyShaderEditor
 
 		public static readonly string InlinePattern = @"\/\*ase_inline_begin\*\/(.*?)\/\*ase_inline_end\*\/";
 
-		public static readonly string SRPConditionPattern = @"\/\*ase_srp_cond_begin:([==|!=|>=|<=|>|<]*)(\d*)\*\/(?s)(.*?)\s\/\*ase_srp_cond_end\*\/";
-
 		public static readonly string SubShaderLODPattern = @"\sLOD\s+(\d+)";
 
 		public static readonly string PassNamePattern = "Name\\s+\\\"([\\w\\+\\-\\*\\/\\(\\) ]*)\\\"";
@@ -943,12 +946,11 @@ namespace AmplifyShaderEditor
 		public static readonly string InterpRangePattern = @"ase_interp\((\d\.{0,1}\w{0,4}),(\d*)\)";
 		//public static readonly string PropertiesPatternB = "(\\w*)\\s*\\(\\s*\"([\\w ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)";
 		//public static readonly string PropertiesPatternC = "^\\s*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)";
-		//public static readonly string PropertiesPatternD = "(\\/\\/\\s*)*(\\w*)\\s*\\(\\s*%\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)";
+		//public static readonly string PropertiesPatternD = "(\\/\\/\\s*)*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)";
 		//public static readonly string PropertiesPatternE = "(\\/\\/\\s*)*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)\\s*=\\s*[\\w,()\" {}]*";
 		//public static readonly string PropertiesPatternF = "^(\\/\\/)*\\s*(\\[[\\[\\]\\w\\s\\(\\)\\_\\,]*\\])*\\s*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)\\s*=\\s*[\\w,()\" {}]*";
 		//public static readonly string PropertiesPatternG = "^(\\s*)(\\[[\\[\\]\\w\\s\\(\\)\\_\\,]*\\])*\\s*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)\\s*=\\s*[\\w,()\" {}]*";
-		//public static readonly string PropertiesPatternH = @"^(\s*)(\[[\[\]\w\s\(\)_,\.]*\])*[\s\/]*(\w*)\s*\(\s*""([\w\(\)\+\-\\* ]*)""\s*\,\s*(\w*)\s*.*\)\s*=\s*[\w,()"" {}\.]*";
-		public static readonly string PropertiesPatternI = @"^(\s*)(\[[\[\]\w\s\(\)_,\.]*\])*[\s\/]*(\w*)\s*\(\s*""([\w\(\)\+\-\\* ]*)""\s*\,\s*(\w*)\s*.*\)\s*=\s*[\w,()"" {}\.]*";
+		public static readonly string PropertiesPatternG = "^(\\s*)(\\[[\\[\\]\\w\\s\\(\\)_,\\.]*\\])*[\\s\\/]*(\\w*)\\s*\\(\\s*\"([\\w\\(\\)\\+\\-\\\\* ]*)\"\\s*\\,\\s*(\\w*)\\s*.*\\)\\s*=\\s*[\\w,()\" {}\\.]*";
 		public static readonly string CullModePattern = @"^\s*Cull\s+(\[*\w+\]*)";
 
 		public static readonly string ColorMaskPatternFirst = @"\bColorMask\s+([\d\w\[\]]+)(\s+0)*";
@@ -1116,7 +1118,7 @@ namespace AmplifyShaderEditor
 			int typeIdx = (int)TemplateShaderPropertiesIdx.Type;
 			int inspectorNameIdx = (int)TemplateShaderPropertiesIdx.InspectorName;
 
-			foreach( Match match in Regex.Matches( propertyData, PropertiesPatternI, RegexOptions.Multiline ) )
+			foreach( Match match in Regex.Matches( propertyData, PropertiesPatternG,RegexOptions.Multiline ) )
 			{
 				if( match.Groups.Count > 1 )
 				{
@@ -1714,62 +1716,6 @@ namespace AmplifyShaderEditor
 				blendDataObj.ValidBlendOp = false;
 		}
 
-		struct SRPConditionalTag
-		{
-
-		}
-
-		public static string ProcessSRPConditionals( string body )
-		{
-			int srpVersion = ASEPackageManagerHelper.PackageSRPVersion;
-			var processedSignatures = new HashSet<string>();
-
-			foreach ( Match match in Regex.Matches( body, SRPConditionPattern ) )
-			{
-				string signature;
-				if ( match.Success && match.Groups.Count == 4 && !processedSignatures.Contains( signature = match.Groups[ 0 ].Value ) )
-				{
-					string comparisonOp = match.Groups[ 1 ].Value;
-					bool validVersion = int.TryParse( match.Groups[ 2 ].Value, out int version );
-					string content = match.Groups[ 3 ].Value;
-
-					if ( validVersion && !string.IsNullOrEmpty( comparisonOp ) && version >= 100000 )
-					{
-						bool passed = false;
-						switch ( comparisonOp )
-						{
-							case "==": passed = ( srpVersion == version ); break;
-							case "!=": passed = ( srpVersion != version ); break;
-							case ">=": passed = ( srpVersion >= version ); break;
-							case "<=": passed = ( srpVersion <= version ); break;
-							case ">" : passed = ( srpVersion >  version ); break;
-							case "<" : passed = ( srpVersion <  version ); break;
-						}
-
-						if ( passed )
-						{
-							// @diogo: test passed? include conditional text
-							body = body.Replace( signature, content );
-						}
-						else
-						{
-							// @diogo: test failed? exclude conditional text
-							body = body.Replace( signature, string.Empty );
-						}
-					}
-					else
-					{
-						// @diogo: fell here? ignore SRP conditional
-						body = body.Replace( signature, string.Empty );
-					}
-
-					// @diogo: mark as processed to prevent duplicates
-					processedSignatures.Add( signature );
-				}
-			}
-			return body;			
-		}
-
 		public static void FetchLocalVars( string body, ref List<TemplateLocalVarData> localVarList, TemplateFunctionData vertexFunction, TemplateFunctionData fragFunction )
 		{
 			foreach( Match match in Regex.Matches( body, LocalVarPattern ) )
@@ -1830,11 +1776,11 @@ namespace AmplifyShaderEditor
 					idManager.RegisterTag( id, prop );
 				}
 			}
-		}		
+		}
 
 		public static TemplateSRPType CreateTags( ref TemplateTagsModuleData tagsObj, bool isSubShader )
 		{
-			TemplateSRPType srpType = TemplateSRPType.BiRP;
+			TemplateSRPType srpType = TemplateSRPType.BuiltIn;
 			MatchCollection matchColl = Regex.Matches( tagsObj.TagsId, TagsPattern, RegexOptions.IgnorePatternWhitespace );
 			int count = matchColl.Count;
 			if( count > 0 )
@@ -2240,8 +2186,13 @@ namespace AmplifyShaderEditor
 				inspectorContainer.Id = match.Groups[ 0 ].Value;
 				inspectorContainer.Data = match.Groups[ 1 ].Value;
 
-				if( inspectorContainer.Data.Equals( "UnityEditor.Experimental.Rendering.HDPipeline.HDLitGUI" ) )
-					inspectorContainer.Data = "UnityEditor.Rendering.HighDefinition.HDLitGUI";				
+#if UNITY_2019_3_OR_NEWER
+				if( ASEPackageManagerHelper.CurrentHDVersion > ASESRPVersions.ASE_SRP_6_9_1 )
+				{
+					if( inspectorContainer.Data.Equals( "UnityEditor.Experimental.Rendering.HDPipeline.HDLitGUI" ) )
+						inspectorContainer.Data = "UnityEditor.Rendering.HighDefinition.HDLitGUI";
+				}
+#endif
 			}
 			else
 			{
@@ -2474,14 +2425,17 @@ namespace AmplifyShaderEditor
 
 		public static readonly string FetchLWDepthFormat = "SHADERGRAPH_SAMPLE_SCENE_DEPTH( {0}.xy )";
 		public static readonly string FetchLWDepthFormatVertex = "SHADERGRAPH_SAMPLE_SCENE_DEPTH_LOD( {0}.xy )";
+#if UNITY_2018_3_OR_NEWER
 		public static readonly string FetchHDDepthFormat = "SampleCameraDepth( {0}.xy )";
-
+#else
+		public static readonly string FetchHDDepthFormat = "SAMPLE_TEXTURE2D( _CameraDepthTexture, s_point_clamp_sampler, {0}.xy ).r";
+#endif
 		public static string CreateDepthFetch( MasterNodeDataCollector dataCollector, string screenPos )
 		{
 			string screenDepthInstruction = string.Empty;
 			if( dataCollector.IsTemplate && dataCollector.IsSRP )
 			{
-				if( dataCollector.TemplateDataCollectorInstance.CurrentSRPType == TemplateSRPType.URP )
+				if( dataCollector.TemplateDataCollectorInstance.CurrentSRPType == TemplateSRPType.Lightweight )
 				{
 					if( dataCollector.PortCategory == MasterNodePortCategory.Vertex )
 					{
@@ -2493,7 +2447,7 @@ namespace AmplifyShaderEditor
 					else
 						screenDepthInstruction = string.Format( FetchLWDepthFormat, screenPos );
 				}
-				else if( dataCollector.TemplateDataCollectorInstance.CurrentSRPType == TemplateSRPType.HDRP )
+				else if( dataCollector.TemplateDataCollectorInstance.CurrentSRPType == TemplateSRPType.HD )
 					screenDepthInstruction = string.Format( FetchHDDepthFormat, screenPos );
 			}
 			else

@@ -1,2 +1,0 @@
-The Rain Update shader was based on Rainier mood effect by Zavie
-https://www.shadertoy.com/view/ldfyzl

@@ -188,14 +188,13 @@ namespace AmplifyShaderEditor
 				{
 					finalShaderBody = finalShaderBody.Replace( m_registeredIds[ i ].Tag, m_registeredIds[ i ].ReplacementText );
 				}
-			}			
+			}
 
 			count = m_registeredTags.Count;
 			for( int i = 0; i < count; i++ )
 			{
-				TemplateTag tag = m_registeredTags[ i ];
-				finalShaderBody = finalShaderBody.Replace( tag.Tag, tag.Replacement );
-				tag.Replacement = tag.Output;
+				finalShaderBody = finalShaderBody.Replace( m_registeredTags[ i ].Tag, m_registeredTags[ i ].Replacement );
+				m_registeredTags[ i ].Replacement = m_registeredTags[ i ].Output;
 			}
 
 			//finalShaderBody = finalShaderBody.Replace( TemplatesManager.TemplateExcludeFromGraphTag, string.Empty );

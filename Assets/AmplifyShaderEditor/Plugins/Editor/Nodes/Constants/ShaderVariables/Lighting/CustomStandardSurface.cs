@@ -26,9 +26,6 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private ViewSpace m_normalSpace = ViewSpace.Tangent;
 
-		[SerializeField]
-		private bool m_normalize = true;
-
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -66,10 +63,6 @@ namespace AmplifyShaderEditor
 
 			EditorGUI.BeginChangeCheck();
 			m_normalSpace = (ViewSpace)EditorGUILayoutEnumPopup( "Normal Space", m_normalSpace );
-			if( m_normalSpace != ViewSpace.World || !m_inputPorts[ 1 ].IsConnected )
-			{
-				m_normalize = EditorGUILayoutToggle("Normalize", m_normalize);
-			}
 			if( EditorGUI.EndChangeCheck() )
 			{
 				UpdatePort();
@@ -125,15 +118,11 @@ namespace AmplifyShaderEditor
 				if( m_normalSpace == ViewSpace.Tangent )
 				{
 					normal = "WorldNormalVector( " + Constants.InputVarStr + " , " + normal + " )";
-					if( m_normalize )
-					{
-						normal = "normalize( " + normal + " )";
-					}
 				}
 			}
 			else
 			{
-				normal = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId, m_normalize );
+				normal = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
 			}
 
 

@@ -79,40 +79,28 @@ namespace AmplifyShaderEditor
 			m_templateType = TemplateDataType.MultiPass;
 		}
 
-		public TemplateMultiPass( string name, string guid, string path, bool isCommunity )
+		public TemplateMultiPass( string name, string guid, bool isCommunity )
 		{
 			m_templateType = TemplateDataType.MultiPass;
-			Init( name, guid, path, isCommunity );
+			Init( name, guid, isCommunity );
 		}
 
-		public override void Init( string name, string guid, string path, bool isCommunity )
+		public override void Init( string name, string guid, bool isCommunity )
 		{
-			base.Init( name, guid, path, isCommunity );
+			base.Init( name, guid, isCommunity );
 			TemplatesManager.CurrTemplateGUIDLoaded = guid;
-			LoadTemplateBody( guid, path );
+			LoadTemplateBody( guid );
 			Name = string.IsNullOrEmpty( name ) ? m_defaultShaderName : name;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////
-		// SRP Conditionals
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void LoadTemplateBody( string guid, string path )
+		void LoadTemplateBody( string guid )
 		{
 			m_passUniqueIdData.Clear();
-			m_guid = guid;			
-
-			string shaderBody = IOUtils.LoadTextFileFromDisk( path );
-			if ( string.IsNullOrEmpty( shaderBody ) )
-			{
-				m_isValid = false;
-				return;
-			}
-
+			m_guid = guid;
+			string datapath = AssetDatabase.GUIDToAssetPath( guid );
+			string shaderBody = string.Empty;
+			shaderBody = IOUtils.LoadTextFileFromDisk( datapath );
 			shaderBody = UIUtils.ForceLFLineEnding( shaderBody );
-
-			// @diogo: Process SRP Conditionals => high priority
-			shaderBody  = TemplateHelperFunctions.ProcessSRPConditionals( shaderBody );
 
 			// Insert Before Tag
 			MatchCollection col = Regex.Matches( shaderBody, TemplateHelperFunctions.BeforePragmaPattern, RegexOptions.Singleline );
@@ -1397,7 +1385,7 @@ namespace AmplifyShaderEditor
 			m_templateProperties.Reset();
 
 			string oldName = m_defaultShaderName;
-			LoadTemplateBody( m_guid, AssetDatabase.GUIDToAssetPath( m_guid ) );
+			LoadTemplateBody( m_guid );
 
 			if( m_communityTemplate )
 				Name = m_defaultShaderName;

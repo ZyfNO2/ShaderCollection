@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEditorInternal;
-using System.Linq;
 
 namespace AmplifyShaderEditor
 {
@@ -34,11 +33,15 @@ namespace AmplifyShaderEditor
 		public string LineValue = string.Empty;
 		public bool GUIDToggle = false;
 		public string GUIDValue = string.Empty;
-		public bool ShowConditionals = false;
-		public int VersionMin = 0;
-		public int VersionMax = 0;
-		public string Passes = string.Empty;
 		public AdditionalContainerOrigin Origin = AdditionalContainerOrigin.Custom;
+		public AdditionalDirectiveContainerSaveItem( AdditionalLineType lineType, string lineValue, bool guidToggle, string guidValue, AdditionalContainerOrigin origin )
+		{
+			LineType = lineType;
+			LineValue = lineValue;
+			GUIDToggle = guidToggle;
+			GUIDValue = guidValue;
+			Origin = origin;
+		}
 
 		public AdditionalDirectiveContainerSaveItem( AdditionalDirectiveContainer container )
 		{
@@ -46,10 +49,6 @@ namespace AmplifyShaderEditor
 			LineValue = container.LineValue;
 			GUIDToggle = container.GUIDToggle;
 			GUIDValue = container.GUIDValue;
-			ShowConditionals = container.ShowConditionals;
-			VersionMin = container.VersionMin;
-			VersionMax = container.VersionMax;
-			Passes = container.Passes;
 			Origin = container.Origin;
 		}
 	}
@@ -61,27 +60,19 @@ namespace AmplifyShaderEditor
 		public string LineValue = string.Empty;
 		public bool GUIDToggle = false;
 		public string GUIDValue = string.Empty;
-		public bool ShowConditionals = false;
-		public int VersionMin = 0;
-		public int VersionMax = 0;
-		public string Passes = string.Empty;
 		public AdditionalContainerOrigin Origin = AdditionalContainerOrigin.Custom;
 		public TextAsset LibObject = null;
 		public string OwnerId = string.Empty;
 
 		public void Init( string ownerId, AdditionalDirectiveContainer item )
 		{
-			LineType = item.LineType;
-			LineValue = item.LineValue;
-			GUIDToggle = item.GUIDToggle;
-			GUIDValue = item.GUIDValue;
-			ShowConditionals = item.ShowConditionals;
-			VersionMin = item.VersionMin;
-			VersionMax = item.VersionMax;
-			Passes = item.Passes;
-			Origin = item.Origin;
-			LibObject = item.LibObject;
-			OwnerId = ownerId;
+			 LineType = item.LineType;
+			 LineValue = item.LineValue;
+			 GUIDToggle = item.GUIDToggle;
+			 GUIDValue = item.GUIDValue;
+			 Origin = item.Origin;
+			 LibObject = item.LibObject;
+			 OwnerId = ownerId;
 		}
 
 		public void Init( AdditionalDirectiveContainerSaveItem item )
@@ -90,10 +81,6 @@ namespace AmplifyShaderEditor
 			LineValue = item.LineValue;
 			GUIDToggle = item.GUIDToggle;
 			GUIDValue = item.GUIDValue;
-			ShowConditionals = item.ShowConditionals;
-			VersionMin = item.VersionMin;
-			VersionMax = item.VersionMax;
-			Passes = item.Passes;
 			Origin = item.Origin;
 			if( GUIDToggle )
 			{
@@ -350,59 +337,6 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		void DrawConditionals( Rect rect, AdditionalDirectiveContainer directive )
-		{
-			var tog = rect;
-			tog.width = 15;
-			tog.x += 5;
-			tog.y -= ( tog.height - ( EditorGUIUtility.singleLineHeight + 5 ) ) * 0.5f + 1;
-			tog.xMin += 2;
-			tog.yMin -= 2;
-			bool value = GUI.Toggle( tog, directive.ShowConditionals, "", UIUtils.MenuItemToggleStyle );
-			if ( Event.current.button == Constants.FoldoutMouseId )
-			{
-				directive.ShowConditionals = value;
-			}
-			if ( directive.ShowConditionals )
-			{
-				const int labelWidth = 70;
-				const int versionEditWidth = 55;
-				Rect condPos = rect;
-				condPos.height = EditorGUIUtility.singleLineHeight;
-
-				// List of passes to apply directive
-				directive.Passes = ( directive.Passes != null ) ? directive.Passes : string.Empty;
-				condPos.x = rect.x + 23;
-				condPos.y += EditorGUIUtility.singleLineHeight + 2;
-				condPos.width = labelWidth;
-				EditorGUI.LabelField( condPos, new GUIContent( "Passes", "Template pass names separated by semicolon (;). Empty means it will be included in all passes." ) );
-				condPos.x += labelWidth;
-				condPos.xMax = rect.xMax + 1;
-				directive.Passes = m_currOwner.EditorGUITextField( condPos, string.Empty, directive.Passes );
-
-				// Range of SRP versions to apply directive
-				condPos.x = rect.x + 23;
-				condPos.y += EditorGUIUtility.singleLineHeight + 2;
-				condPos.width = labelWidth;
-				EditorGUI.LabelField( condPos, new GUIContent( "SRPVersion", "Valid SRP version numbers must have 6 digits and be equal or higher than 100000, the lowest supported version." ) );
-				condPos.x += labelWidth;
-
-				condPos.width = versionEditWidth;
-				string minText = ( directive.VersionMin == 0 ) ? string.Empty : directive.VersionMin.ToString();
-				minText = m_currOwner.EditorGUITextField( condPos, string.Empty, minText );
-				directive.VersionMin = int.TryParse( minText, out int min ) ? min : 0;
-				condPos.x += versionEditWidth + 5;
-
-				EditorGUI.LabelField( condPos, "to" );
-				condPos.x += 20;
-
-				string maxText = ( directive.VersionMax == 0 ) ? string.Empty : directive.VersionMax.ToString();
-				maxText = m_currOwner.EditorGUITextField( condPos, string.Empty, maxText );
-				directive.VersionMax = int.TryParse( maxText, out int max ) ? max : 0;
-				condPos.x = rect.x + 40;
-			}
-		}
-
 		public override void Draw( UndoParentNode currOwner, bool style = true )
 		{
 			m_currOwner = currOwner;
@@ -419,8 +353,8 @@ namespace AmplifyShaderEditor
 						{
 							return ( m_nativeDirectives.Count + 1 ) * ( EditorGUIUtility.singleLineHeight ) + 5;
 						}
-						int lineCount = ( m_additionalDirectives[ index ].ShowConditionals ) ? 3 : 1;
-						return EditorGUIUtility.singleLineHeight * lineCount + 5;
+
+						return EditorGUIUtility.singleLineHeight + 5;
 					},
 					drawElementCallback = ( Rect rect, int index, bool isActive, bool isFocused ) =>
 					{
@@ -432,14 +366,31 @@ namespace AmplifyShaderEditor
 						if( m_additionalDirectives[ index ] != null )
 						{
 							float labelWidthStyleAdjust = 0;
-
-							if ( m_additionalDirectives[ index ].Origin == AdditionalContainerOrigin.Native )
+							if( style )
 							{
-								rect.xMin -= 5;
-								rect.xMax += 1;
+								rect.xMin -= 10;
+								labelWidthStyleAdjust = 15;
+							}
+							else
+							{
+								rect.xMin -= 1;
+							}
 
+							float popUpWidth = style ? 80 : 65f;
+							float widthAdjust = m_additionalDirectives[ index ].LineType == AdditionalLineType.Include ? -14 : 0;
+							Rect popupPos = new Rect( rect.x, rect.y, popUpWidth, EditorGUIUtility.singleLineHeight );
+							Rect GUIDTogglePos = m_additionalDirectives[ index ].LineType == AdditionalLineType.Include ? new Rect( rect.x + rect.width - 3 * Constants.PlusMinusButtonLayoutWidth, rect.y, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth ) : new Rect();
+							Rect buttonPlusPos = new Rect( rect.x + rect.width - 2 * Constants.PlusMinusButtonLayoutWidth, rect.y - 2, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth );
+							Rect buttonMinusPos = new Rect( rect.x + rect.width - Constants.PlusMinusButtonLayoutWidth, rect.y - 2, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth );
+							float labelWidthBuffer = EditorGUIUtility.labelWidth;
+							Rect labelPos = new Rect( rect.x + popupPos.width - labelWidthStyleAdjust, rect.y, labelWidthStyleAdjust + rect.width - popupPos.width - buttonPlusPos.width - buttonMinusPos.width + widthAdjust, EditorGUIUtility.singleLineHeight );
+
+							if( m_additionalDirectives[ index ].Origin == AdditionalContainerOrigin.Native )
+							{
 								m_nativeRect = rect;
+#if UNITY_2019_3_OR_NEWER
 								m_nativeRect.y -= ( m_nativeRect.height - ( EditorGUIUtility.singleLineHeight + 5 ) ) * 0.5f;
+#endif
 								m_nativeRect.xMin += 2;
 								m_nativeRect.xMax -= 2;
 								m_nativeRect.yMax -= 2;
@@ -447,28 +398,6 @@ namespace AmplifyShaderEditor
 								NodeUtils.DrawNestedPropertyGroup( ref m_nativeDirectivesFoldout, rect, NativeFoldoutStr, DrawNativeItemsRect, 4 );
 								return;
 							}
-							else
-							{
-								rect.xMin -= 10;
-								labelWidthStyleAdjust = 15;
-
-								DrawConditionals( rect, m_additionalDirectives[ index ] );
-							}
-
-							const int conditionalsOffset = 20;
-							rect.x += conditionalsOffset;
-
-							float popUpWidth = 88;
-							float widthAdjust = m_additionalDirectives[ index ].LineType == AdditionalLineType.Include ? -14 : 0;
-							widthAdjust -= conditionalsOffset;
-							Rect popupPos = new Rect( rect.x, rect.y, popUpWidth, EditorGUIUtility.singleLineHeight );
-							Rect GUIDTogglePos = m_additionalDirectives[ index ].LineType == AdditionalLineType.Include ? new Rect( rect.x + rect.width - 3 * Constants.PlusMinusButtonLayoutWidth - conditionalsOffset + 3, rect.y, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth ) : new Rect();
-							Rect buttonPlusPos = new Rect( rect.x + rect.width - 2 * Constants.PlusMinusButtonLayoutWidth - conditionalsOffset + 1, rect.y - 2, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth );
-							Rect buttonMinusPos = new Rect( rect.x + rect.width - Constants.PlusMinusButtonLayoutWidth - conditionalsOffset + 1, rect.y - 2, Constants.PlusMinusButtonLayoutWidth, Constants.PlusMinusButtonLayoutWidth );
-							float labelWidthBuffer = EditorGUIUtility.labelWidth;
-							Rect labelPos = new Rect( rect.x + popupPos.width - labelWidthStyleAdjust, rect.y, labelWidthStyleAdjust + rect.width - popupPos.width - buttonPlusPos.width - buttonMinusPos.width + widthAdjust, EditorGUIUtility.singleLineHeight );
-
-
 
 							m_additionalDirectives[ index ].LineType = (AdditionalLineType)m_currOwner.EditorGUIEnumPopup( popupPos, m_additionalDirectives[ index ].LineType );
 
@@ -508,9 +437,7 @@ namespace AmplifyShaderEditor
 								m_additionalDirectives[ index ].LineValue = m_currOwner.EditorGUITextField( labelPos, string.Empty, m_additionalDirectives[ index ].LineValue );
 							}
 
-							//NodeUtils.DrawNestedPropertyGroup( ref m_additionalDirectives[ index ].ShowConditionals, rect, "TEMP", DrawConditionals, 4 );
-
-							if ( GUI.Button( buttonPlusPos, string.Empty, UIUtils.PlusStyle ) )
+							if( GUI.Button( buttonPlusPos, string.Empty, UIUtils.PlusStyle ) )
 							{
 								m_actionType = ReordableAction.Add;
 								m_actionIndex = index;
@@ -591,7 +518,7 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		public void AddAllToDataCollector( ref MasterNodeDataCollector dataCollector, TemplatePass pass, TemplateIncludePragmaContainter nativesContainer )
+		public void AddAllToDataCollector( ref MasterNodeDataCollector dataCollector, TemplateIncludePragmaContainter nativesContainer )
 		{
 			//List<AdditionalDirectiveContainer> list = m_additionalDirectives;
 			//int count = list.FindIndex( x => x.Origin.Equals( AdditionalContainerOrigin.Native ) );
@@ -634,112 +561,73 @@ namespace AmplifyShaderEditor
 			//	}
 			//}
 
-			AddToDataCollector( ref dataCollector, pass, nativesContainer, false );
-			AddToDataCollector( ref dataCollector, pass, nativesContainer, true );
+			AddToDataCollector( ref dataCollector, nativesContainer, false );
+			AddToDataCollector( ref dataCollector, nativesContainer, true );
 		}
 
 		public void AddAllToDataCollector( ref MasterNodeDataCollector dataCollector )
 		{
-			AddToDataCollector( ref dataCollector, null, false );
-			AddToDataCollector( ref dataCollector, null, true );
+			AddToDataCollector( ref dataCollector, false );
+			AddToDataCollector( ref dataCollector, true );
 		}
 
-		bool TestConditionals( TemplatePass pass, AdditionalDirectiveContainer directive )
-		{
-			bool isSRP = ASEPackageManagerHelper.CurrentSRPVersion > 0;
-			if ( isSRP && directive.VersionMin != 0 && ASEPackageManagerHelper.CurrentSRPVersion < directive.VersionMin )
-			{
-				return false;
-			}
-
-			if ( isSRP && directive.VersionMax != 0 && ASEPackageManagerHelper.CurrentSRPVersion > directive.VersionMax )
-			{
-				return false;
-			}
-
-			if ( pass != null && !string.IsNullOrEmpty( directive.Passes ) )
-			{
-				string[] passes = directive.Passes.Split( ';' );
-				if ( !passes.Contains( pass.PassNameContainer.Data ) )
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		void AddToDataCollector( ref MasterNodeDataCollector dataCollector, TemplatePass pass, TemplateIncludePragmaContainter nativesContainer, bool fromSF )
+		void AddToDataCollector( ref MasterNodeDataCollector dataCollector, TemplateIncludePragmaContainter nativesContainer, bool fromSF )
 		{
 			List<AdditionalDirectiveContainer> list = fromSF ? m_shaderFunctionDirectives : m_additionalDirectives;
 			int count = list.Count;
 			for( int i = 0; i < count; i++ )
 			{
-				AdditionalDirectiveContainer directive = list[ i ];
 				int orderIdx = fromSF ? 1 : ( i > m_nativeDirectivesIndex ? 1 : -1 );
-
-				if ( !TestConditionals( pass, directive ) )
-				{
-					continue;
-				}
-
-				switch( directive.LineType )
+				switch( list[ i ].LineType )
 				{
 					case AdditionalLineType.Include:
 					{
-						string value = directive.Value;
+						string value = list[ i ].Value;
 						if( !string.IsNullOrEmpty( value ) &&
 						  !nativesContainer.HasInclude( value ) )
 						{
-							dataCollector.AddToDirectives( directive.FormattedValue, orderIdx );
+							dataCollector.AddToDirectives( list[ i ].FormattedValue, orderIdx );
 						}
 					}
 					break;
 					case AdditionalLineType.Define:
 					{
-						if( !string.IsNullOrEmpty( directive.LineValue ) &&
-						  !nativesContainer.HasDefine( directive.LineValue ) )
+						if( !string.IsNullOrEmpty( list[ i ].LineValue ) &&
+						  !nativesContainer.HasDefine( list[ i ].LineValue ) )
 						{
-							dataCollector.AddToDirectives( directive.FormattedValue, orderIdx );
+							dataCollector.AddToDirectives( list[ i ].FormattedValue, orderIdx );
 						}
 					}
 					break;
 					case AdditionalLineType.Pragma:
 					{
-						if( !string.IsNullOrEmpty( directive.LineValue ) &&
-						  !nativesContainer.HasPragma( directive.LineValue ) )
+						if( !string.IsNullOrEmpty( list[ i ].LineValue ) &&
+						  !nativesContainer.HasPragma( list[ i ].LineValue ) )
 						{
-							dataCollector.AddToDirectives( directive.FormattedValue, orderIdx );
+							dataCollector.AddToDirectives( list[ i ].FormattedValue, orderIdx );
 						}
 					}
 					break;
 					default:
 					case AdditionalLineType.Custom:
-					dataCollector.AddToDirectives( directive.LineValue, orderIdx );
-						break;
+					dataCollector.AddToDirectives( list[ i ].LineValue, orderIdx );
+					break;
 				}
 			}
 		}
 
-		void AddToDataCollector( ref MasterNodeDataCollector dataCollector, TemplatePass pass, bool fromSF )
+		void AddToDataCollector( ref MasterNodeDataCollector dataCollector, bool fromSF )
 		{
 			List<AdditionalDirectiveContainer> list = fromSF ? m_shaderFunctionDirectives : m_additionalDirectives;
 			int orderIdx = 1;
 			int count = list.Count;
 			for( int i = 0; i < count; i++ )
 			{
-				AdditionalDirectiveContainer directive = list[ i ];
-
-				if ( !TestConditionals( pass, directive ) )
-				{
-					continue;
-				}
-
-				switch ( directive.LineType )
+				switch( list[ i ].LineType )
 				{
 					case AdditionalLineType.Include:
 					{
-						string value = directive.FormattedValue;
+						string value = list[ i ].FormattedValue;
 						if( !string.IsNullOrEmpty( value ) )
 						{
 							dataCollector.AddToDirectives( value, orderIdx );
@@ -748,23 +636,23 @@ namespace AmplifyShaderEditor
 					break;
 					case AdditionalLineType.Define:
 					{
-						if( !string.IsNullOrEmpty( directive.LineValue ) )
+						if( !string.IsNullOrEmpty( list[ i ].LineValue ) )
 						{
-							dataCollector.AddToDirectives( directive.FormattedValue, orderIdx );
+							dataCollector.AddToDirectives( list[ i ].FormattedValue, orderIdx );
 						}
 					}
 					break;
 					case AdditionalLineType.Pragma:
 					{
-						if( !string.IsNullOrEmpty( directive.LineValue ) )
+						if( !string.IsNullOrEmpty( list[ i ].LineValue ) )
 						{
-							dataCollector.AddToDirectives( directive.FormattedValue, orderIdx );
+							dataCollector.AddToDirectives( list[ i ].FormattedValue, orderIdx );
 						}
 					}
 					break;
 					default:
 					case AdditionalLineType.Custom:
-					dataCollector.AddToDirectives( directive.LineValue, orderIdx );
+					dataCollector.AddToDirectives( list[ i ].LineValue, orderIdx );
 					break;
 				}
 			}
@@ -804,14 +692,6 @@ namespace AmplifyShaderEditor
 						origin = (AdditionalContainerOrigin)Enum.Parse( typeof( AdditionalContainerOrigin ), nodeParams[ index++ ] );
 						newItem.Origin = origin;
 					}
-					if ( UIUtils.CurrentShaderVersion() > 19103 )
-					{
-						newItem.ShowConditionals = Convert.ToBoolean( nodeParams[ index++ ] );
-						newItem.VersionMin = Convert.ToInt32( nodeParams[ index++ ] );
-						newItem.VersionMax = Convert.ToInt32( nodeParams[ index++ ] );
-						newItem.Passes = nodeParams[ index++ ];
-						newItem.Passes.Replace( Constants.SemiColonSeparator, ';' );
-					}
 
 					m_additionalDirectives.Add( newItem );
 
@@ -844,10 +724,6 @@ namespace AmplifyShaderEditor
 				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].GUIDToggle );
 				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].GUIDValue );
 				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].Origin );
-				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].ShowConditionals );
-				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].VersionMin );
-				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].VersionMax );
-				IOUtils.AddFieldValueToString( ref nodeInfo, m_additionalDirectives[ i ].Passes.Replace( ';', Constants.SemiColonSeparator ) );
 			}
 		}
 

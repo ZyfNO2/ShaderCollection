@@ -34,36 +34,51 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private bool m_active = true;
 
-		private const int ReferenceDefaultValue = 0;
-		[SerializeField] private InlineProperty m_reference = new InlineProperty( ReferenceDefaultValue );
+        [SerializeField]
+        private InlineProperty m_reference = new InlineProperty();
 
         // Read Mask
         private const int ReadMaskDefaultValue = 255;
-        [SerializeField] private InlineProperty m_readMask = new InlineProperty( ReadMaskDefaultValue );
+        [SerializeField]
+        private InlineProperty m_readMask = new InlineProperty( ReadMaskDefaultValue );
 
         //Write Mask
         private const int WriteMaskDefaultValue = 255;
-        [SerializeField] private InlineProperty m_writeMask = new InlineProperty( WriteMaskDefaultValue );
+        [SerializeField]
+        private InlineProperty m_writeMask = new InlineProperty( WriteMaskDefaultValue );
 
-		//Comparison Function
-		[NonSerialized] private int ComparisonDefaultValue = 0;
-        [SerializeField] private InlineProperty m_comparisonFunctionFrontIdx;
-        [SerializeField] private InlineProperty m_comparisonFunctionBackIdx;
+        //Comparison Function
+        private const int ComparisonDefaultValue = 0;
+        [SerializeField]
+        private InlineProperty m_comparisonFunctionFrontIdx = new InlineProperty( ComparisonDefaultValue );
 
-		//Pass Stencil Op
-		[NonSerialized] private int PassStencilOpDefaultValue = 0;
-		[SerializeField] private InlineProperty m_passStencilOpFrontIdx;
-        [SerializeField] private InlineProperty m_passStencilOpBackIdx;
+        [SerializeField]
+        private InlineProperty m_comparisonFunctionBackIdx = new InlineProperty( ComparisonDefaultValue );
 
-        //Fail Stencil Op
-        [NonSerialized] private int FailStencilOpDefaultValue = 0;
-		[SerializeField] private InlineProperty m_failStencilOpFrontIdx;
-        [SerializeField] private InlineProperty m_failStencilOpBackIdx;
+        //Pass Stencil Op
+        private const int PassStencilOpDefaultValue = 0;
+        [SerializeField]
+        private InlineProperty m_passStencilOpFrontIdx = new InlineProperty( PassStencilOpDefaultValue );
 
-		//ZFail Stencil Op
-		[NonSerialized] private int ZFailStencilOpDefaultValue = 0;
-		[SerializeField] private InlineProperty m_zFailStencilOpFrontIdx;
-        [SerializeField] private InlineProperty m_zFailStencilOpBackIdx;
+        [SerializeField]
+        private InlineProperty m_passStencilOpBackIdx = new InlineProperty( PassStencilOpDefaultValue );
+
+        //Fail Stencil Op 
+        private const int FailStencilOpDefaultValue = 0;
+
+        [SerializeField]
+        private InlineProperty m_failStencilOpFrontIdx = new InlineProperty( FailStencilOpDefaultValue );
+
+        [SerializeField]
+        private InlineProperty m_failStencilOpBackIdx = new InlineProperty( FailStencilOpDefaultValue );
+
+        //ZFail Stencil Op
+        private const int ZFailStencilOpDefaultValue = 0;
+        [SerializeField]
+        private InlineProperty m_zFailStencilOpFrontIdx = new InlineProperty( ZFailStencilOpDefaultValue );
+
+        [SerializeField]
+        private InlineProperty m_zFailStencilOpBackIdx = new InlineProperty( ZFailStencilOpDefaultValue );
 
         public TemplatesStencilBufferModule() : base("Stencil Buffer")
         {
@@ -76,19 +91,7 @@ namespace AmplifyShaderEditor
             {
                 m_stencilOpsDict.Add( StencilBufferOpHelper.StencilOpsValues[ i ].ToLower(), i );
             }
-
-	        m_comparisonFunctionFrontIdx = new InlineProperty( ComparisonDefaultValue );
-			m_comparisonFunctionBackIdx = new InlineProperty( ComparisonDefaultValue );
-
-	        m_passStencilOpFrontIdx = new InlineProperty( PassStencilOpDefaultValue );
-		    m_passStencilOpBackIdx = new InlineProperty( PassStencilOpDefaultValue );
-
-		    m_failStencilOpFrontIdx = new InlineProperty( FailStencilOpDefaultValue );
-	        m_failStencilOpBackIdx = new InlineProperty( FailStencilOpDefaultValue );
-
-			m_zFailStencilOpFrontIdx = new InlineProperty( ZFailStencilOpDefaultValue );
-			m_zFailStencilOpBackIdx = new InlineProperty( ZFailStencilOpDefaultValue );
-		}
+        }
 
 		public void CopyFrom( TemplatesStencilBufferModule other , bool allData )
 		{
@@ -146,7 +149,6 @@ namespace AmplifyShaderEditor
 					m_writeMask.SetInlineByName( stencilData.WriteMaskInline );
 				}
 
-				// Front
 				if( string.IsNullOrEmpty( stencilData.ComparisonFrontInline ) )
 				{
 					if( !string.IsNullOrEmpty( stencilData.ComparisonFront ) )
@@ -155,7 +157,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_comparisonFunctionFrontIdx.IntValue = ComparisonDefaultValue;
+						m_comparisonFunctionFrontIdx.IntValue = m_comparisonDict[ "always" ];
 					}
 					m_comparisonFunctionFrontIdx.ResetProperty();
 				}
@@ -172,7 +174,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_passStencilOpFrontIdx.IntValue = PassStencilOpDefaultValue;
+						m_passStencilOpFrontIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_passStencilOpFrontIdx.ResetProperty();
 				}
@@ -189,7 +191,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_failStencilOpFrontIdx.IntValue = FailStencilOpDefaultValue;
+						m_failStencilOpFrontIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_failStencilOpFrontIdx.ResetProperty();
 				}
@@ -206,7 +208,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_zFailStencilOpFrontIdx.IntValue = ZFailStencilOpDefaultValue;
+						m_zFailStencilOpFrontIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_zFailStencilOpFrontIdx.ResetProperty();
 				}
@@ -215,8 +217,7 @@ namespace AmplifyShaderEditor
 					m_zFailStencilOpFrontIdx.SetInlineByName( stencilData.ZFailFrontInline );
 				}
 
-				// Back
-				if ( string.IsNullOrEmpty( stencilData.ComparisonBackInline ) )
+				if( string.IsNullOrEmpty( stencilData.ComparisonBackInline ) )
 				{
 					if( !string.IsNullOrEmpty( stencilData.ComparisonBack ) )
 					{
@@ -224,7 +225,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_comparisonFunctionBackIdx.IntValue = ComparisonDefaultValue;
+						m_comparisonFunctionBackIdx.IntValue = m_comparisonDict[ "always" ];
 					}
 					m_comparisonFunctionBackIdx.ResetProperty();
 				}
@@ -242,7 +243,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_passStencilOpBackIdx.IntValue = PassStencilOpDefaultValue;
+						m_passStencilOpBackIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_passStencilOpBackIdx.ResetProperty();
 				}
@@ -259,7 +260,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_failStencilOpBackIdx.IntValue = FailStencilOpDefaultValue;
+						m_failStencilOpBackIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_failStencilOpBackIdx.ResetProperty();
 				}
@@ -277,7 +278,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						m_zFailStencilOpBackIdx.IntValue = ZFailStencilOpDefaultValue;
+						m_zFailStencilOpBackIdx.IntValue = m_stencilOpsDict[ "keep" ];
 					}
 					m_zFailStencilOpBackIdx.ResetProperty();
 				}

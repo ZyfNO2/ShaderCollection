@@ -14,40 +14,21 @@ namespace AmplifyShaderEditor
 
 		private const string ASEAttenVarName = "ase_lightAtten";
 
-		private readonly string[] URP10PragmaMultiCompiles =
+		private readonly string[] LightweightPragmaMultiCompiles =
 		{
 			"multi_compile _ _MAIN_LIGHT_SHADOWS",
 			"multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE",
-			"multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS",
-			"multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS",
-			"multi_compile_fragment _ _SHADOWS_SOFT"
+			"multi_compile _ _SHADOWS_SOFT"
 		};
 
-		private readonly string[] URP11PragmaMultiCompiles =
-		{
-			"multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN",
-			"multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS",
-			"multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS",
-			"multi_compile_fragment _ _SHADOWS_SOFT"
-		};
-
+#if UNITY_2021_1_OR_NEWER
 		private readonly string[] URP12PragmaMultiCompiles =
 		{
 			"multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN",
-			"multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS",
-			"multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS",
-			"multi_compile_fragment _ _SHADOWS_SOFT"
+			"multi_compile _ _ADDITIONAL_LIGHT_SHADOWS",
+			"multi_compile _ _SHADOWS_SOFT"
 		};
-
-		private readonly string[] URP14PragmaMultiCompiles =
-		{
-			"multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN",
-			"multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS",
-			"multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS",
-			"multi_compile_fragment _ _SHADOWS_SOFT",
-			"multi_compile _ _FORWARD_PLUS"
-		};
-
+#endif
 		//private readonly string[] LightweightVertexInstructions =
 		//{
 		//	/*local vertex position*/"VertexPositionInputs ase_vertexInput = GetVertexPositionInputs ({0});",
@@ -89,35 +70,24 @@ namespace AmplifyShaderEditor
 				}
 				else
 				{
-					if( dataCollector.CurrentSRPType == TemplateSRPType.URP )
+					if( dataCollector.CurrentSRPType == TemplateSRPType.Lightweight )
 					{
 						if( dataCollector.HasLocalVariable( LightweightLightAttenDecl ))
 							return ASEAttenVarName;
 
 						// Pragmas
-						string[] pragmas;
-						if ( ASEPackageManagerHelper.CurrentURPBaseline >= ASESRPBaseline.ASE_SRP_14 )
+#if UNITY_2021_1_OR_NEWER
+						if( ASEPackageManagerHelper.CurrentLWVersion >= ASESRPVersions.ASE_SRP_12_0_0 )
 						{
-							pragmas = URP14PragmaMultiCompiles;
-						}
-						else if ( ASEPackageManagerHelper.CurrentURPBaseline >= ASESRPBaseline.ASE_SRP_12 )
-						{
-							pragmas = URP12PragmaMultiCompiles;
-						}
-						else if ( ASEPackageManagerHelper.CurrentURPBaseline >= ASESRPBaseline.ASE_SRP_11 )
-						{
-							pragmas = URP11PragmaMultiCompiles;
+							for( int i = 0 ; i < URP12PragmaMultiCompiles.Length ; i++ )
+								dataCollector.AddToPragmas( UniqueId , URP12PragmaMultiCompiles[ i ] );
 						}
 						else
+#endif
 						{
-							pragmas = URP10PragmaMultiCompiles;
+							for( int i = 0 ; i < LightweightPragmaMultiCompiles.Length ; i++ )
+								dataCollector.AddToPragmas( UniqueId , LightweightPragmaMultiCompiles[ i ] );
 						}
-
-						for ( int i = 0; i < pragmas.Length; i++ )
-						{
-							dataCollector.AddToPragmas( UniqueId, pragmas[ i ] );
-						}
-
 						//string shadowCoords = dataCollector.TemplateDataCollectorInstance.GetShadowCoords( UniqueId/*, false, dataCollector.PortCategory*/ );
 						//return shadowCoords;
 						// Vertex Instructions
@@ -162,7 +132,7 @@ namespace AmplifyShaderEditor
 		public override void Draw( DrawInfo drawInfo )
 		{
 			base.Draw( drawInfo );
-			if( ContainerGraph.CurrentCanvasMode == NodeAvailability.TemplateShader && ContainerGraph.CurrentSRPType != TemplateSRPType.URP )
+			if( ContainerGraph.CurrentCanvasMode == NodeAvailability.TemplateShader && ContainerGraph.CurrentSRPType != TemplateSRPType.Lightweight )
 			{
 				m_showErrorMessage = true;
 				m_errorMessageTypeIsError = NodeMessageType.Warning;

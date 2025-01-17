@@ -89,7 +89,11 @@ namespace AmplifyShaderEditor
 		public void DrawCustomOptionsBlock()
 		{
 			float currWidth = EditorGUIUtility.labelWidth;
+#if UNITY_2019_3_OR_NEWER
 			float size = Mathf.Max( UIUtils.CurrentWindow.ParametersWindow.TransformedArea.width * 0.385f, 0 );
+#else
+			float size = Mathf.Max( UIUtils.CurrentWindow.ParametersWindow.TransformedArea.width * 0.34f, 0 );
+#endif
 			EditorGUIUtility.labelWidth = size;
 			for( int i = 0; i < m_passCustomOptionsUI.Count; i++ )
 			{
@@ -141,7 +145,7 @@ namespace AmplifyShaderEditor
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find Option {0} for action '{1}' on template {2}", validActions[ i ].ActionData, validActions[ i ].ActionType, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find Option {0} for action {1}", validActions[ i ].ActionData, validActions[ i ].ActionType );
 						}
 					}
 					break;
@@ -165,7 +169,7 @@ namespace AmplifyShaderEditor
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find Option {0} for action '{1}' on template {2}", validActions[ i ].ActionData, validActions[ i ].ActionType, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find Option {0} for action {1}", validActions[ i ].ActionData, validActions[ i ].ActionType );
 						}
 					}
 					break;
@@ -178,11 +182,11 @@ namespace AmplifyShaderEditor
 						if( item != null )
 						{
 							item.CurrentOption = validActions[ i ].ActionDataIdx;
-							item.Update( isRefreshing );
+							item.Refresh();
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find Option {0} for action '{1}' on template {2}", validActions[ i ].ActionData, validActions[ i ].ActionType, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find Option {0} for action {1}", validActions[ i ].ActionData, validActions[ i ].ActionType );
 						}
 					}
 					break;
@@ -215,12 +219,12 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find port {0},{1} for action '{2}' on template {3}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionData, validActions[ i ].ActionType, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find port {0},{1} for action {2}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionData, validActions[ i ].ActionType );
 							}
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 						}
 					}
 					break;
@@ -253,12 +257,12 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find port {0},{1} for action '{2}' on template {3}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionData, validActions[ i ].ActionType, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find port {0},{1} for action {2}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionData, validActions[ i ].ActionType );
 							}
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 						}
 					}
 					break;
@@ -283,12 +287,12 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find port {0},{1} for action '{2}' on template {3}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find port {0},{1} for action {2}", validActions[ i ].ActionDataIdx, validActions[ i ].ActionData, validActions[ i ].ActionType );
 							}
 						}
 						else
 						{
-							Debug.LogFormat( "Could not find pass {0}, {1} for action '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+							Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 						}
 					}
 					break;
@@ -352,7 +356,7 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 							}
 						}
 						else
@@ -421,7 +425,7 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 							}
 						}
 						else
@@ -467,7 +471,7 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 							}
 						}
 						else
@@ -517,7 +521,7 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 							}
 						}
 						else
@@ -565,7 +569,7 @@ namespace AmplifyShaderEditor
 							}
 							else
 							{
-								Debug.LogFormat( "Could not find pass {0} for action {1} '{2}' on template {3}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData, owner.CurrentTemplate.DefaultShaderName );
+								Debug.LogFormat( "Could not find pass {0} for action {1} on {2}", validActions[ i ].PassName, validActions[ i ].ActionType, validActions[ i ].ActionData );
 							}
 						}
 						else
@@ -865,7 +869,7 @@ namespace AmplifyShaderEditor
 			int count = sortedList.Count;
 			for( int i = 0 ; i < count ; i++ )
 			{
-				sortedList[ i ].Update();
+				sortedList[ i ].Refresh();
 			}
 		}
 

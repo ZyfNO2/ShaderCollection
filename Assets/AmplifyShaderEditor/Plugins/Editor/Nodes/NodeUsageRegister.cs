@@ -73,8 +73,8 @@ namespace AmplifyShaderEditor
 			{
 				if( m_containerGraph != null )
 				{
-					UndoUtils.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoRegisterNodeId );
-					UndoUtils.RegisterCompleteObjectUndo( m_containerGraph, Constants.UndoRegisterNodeId );
+					Undo.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoRegisterNodeId );
+					Undo.RegisterCompleteObjectUndo( m_containerGraph, Constants.UndoRegisterNodeId );
 				}
 				m_nodes.Add( node );
 				ReorderNodes();
@@ -103,8 +103,8 @@ namespace AmplifyShaderEditor
 			{
 				if( m_containerGraph != null )
 				{
-					UndoUtils.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoUnregisterNodeId );
-					UndoUtils.RegisterCompleteObjectUndo( m_containerGraph, Constants.UndoUnregisterNodeId );
+					Undo.RegisterCompleteObjectUndo( m_containerGraph.ParentWindow, Constants.UndoUnregisterNodeId );
+					Undo.RegisterCompleteObjectUndo( m_containerGraph, Constants.UndoUnregisterNodeId );
 				}
 
 				m_nodes.Remove( node );
@@ -117,15 +117,10 @@ namespace AmplifyShaderEditor
 		{
 			if( ReorderOnChange )
 			{
-				UnityEngine.Profiling.Profiler.BeginSample( "ReorderNodes_Sort" );
 				m_nodes.Sort( ( x, y ) => ( x.DataToArray.CompareTo( y.DataToArray ) ) );
-				UnityEngine.Profiling.Profiler.EndSample();
-
 				if( OnReorderEventComplete != null )
 				{
-					UnityEngine.Profiling.Profiler.BeginSample( "ReorderNodes_CallEvent" );
 					OnReorderEventComplete();
-					UnityEngine.Profiling.Profiler.EndSample();
 				}
 			}
 		}

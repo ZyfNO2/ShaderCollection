@@ -61,15 +61,7 @@ namespace AmplifyShaderEditor
 			string front = m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector );
 			string back = m_inputPorts[ 1 ].GeneratePortInstructions( ref dataCollector );
 
-			if ( dataCollector.CurrentCanvasMode == NodeAvailability.TemplateShader )
-			{
-				dataCollector.AddToInput( UniqueId, SurfaceInputs.FRONT_FACING );
-			}
-			else
-			{
-				dataCollector.AddToInput( UniqueId, SurfaceInputs.FRONT_FACING_VFACE );
-			}
-
+			dataCollector.AddToInput( UniqueId, SurfaceInputs.VFACE );
 			string variable = string.Empty;
 			if ( dataCollector.IsTemplate )
 			{
@@ -77,7 +69,7 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				variable = ( ( dataCollector.PortCategory == MasterNodePortCategory.Vertex ) ? Constants.VertexShaderOutputStr : Constants.InputVarStr ) + "." + Constants.IsFrontFacingVariable;
+				variable = ( ( dataCollector.PortCategory == MasterNodePortCategory.Vertex ) ? Constants.VertexShaderOutputStr : Constants.InputVarStr ) + "." + Constants.VFaceVariable;
 			}
 
 			string value = string.Format( SwitchOp, variable, front, back );

@@ -13,8 +13,6 @@ namespace AmplifyShaderEditor
 	{
 		[SerializeField]
 		private ViewSpace m_normalSpace = ViewSpace.Tangent;
-		[SerializeField]
-		private bool m_normalize = true;
 
 		private int m_cachedIntensityId = -1;
 
@@ -85,10 +83,6 @@ namespace AmplifyShaderEditor
 
 			EditorGUI.BeginChangeCheck();
 			m_normalSpace = (ViewSpace)EditorGUILayoutEnumPopup( "Normal Space", m_normalSpace );
-			if( m_normalSpace != ViewSpace.World || !m_inputPorts[ 0 ].IsConnected )
-			{
-				m_normalize = EditorGUILayoutToggle("Normalize", m_normalize);
-			}
 			if( EditorGUI.EndChangeCheck() )
 			{
 				UpdatePort();
@@ -209,7 +203,7 @@ namespace AmplifyShaderEditor
 				}
 				else
 				{
-					if( dataCollector.CurrentSRPType == TemplateSRPType.URP )
+					if( dataCollector.CurrentSRPType == TemplateSRPType.Lightweight )
 					{
 						string texcoord1 = string.Empty;
 
@@ -226,7 +220,7 @@ namespace AmplifyShaderEditor
 						{
 							string worldNormal = dataCollector.TemplateDataCollectorInstance.GetWorldNormal( PrecisionType.Float, false, MasterNodePortCategory.Vertex );
 							dataCollector.TemplateDataCollectorInstance.RequestNewInterpolator( WirePortDataType.FLOAT4, false, "lightmapUVOrVertexSH" );
-
+							
 							dataCollector.AddToVertexLocalVariables( UniqueId, "OUTPUT_LIGHTMAP_UV( " + texcoord1 + ", unity_LightmapST, " + vOutName + ".lightmapUVOrVertexSH.xy );" );
 							dataCollector.AddToVertexLocalVariables( UniqueId, "OUTPUT_SH( " + worldNormal + ", " + vOutName + ".lightmapUVOrVertexSH.xyz );" );
 
@@ -263,13 +257,13 @@ namespace AmplifyShaderEditor
 						dataCollector.AddLocalVariable( UniqueId, CurrentPrecisionType, WirePortDataType.FLOAT3, finalValue, result );
 						string mainLight = dataCollector.TemplateDataCollectorInstance.GetURPMainLight(UniqueId);
 						dataCollector.AddLocalVariable( UniqueId , string.Format( LWMixRealtimeWithGI , mainLight , fragWorldNormal , finalValue ) );
-
+						
 
 
 						m_outputPorts[ 0 ].SetLocalValue( finalValue, dataCollector.PortCategory );
 						return finalValue;
 					}
-					else if( dataCollector.CurrentSRPType == TemplateSRPType.HDRP )
+					else if( dataCollector.CurrentSRPType == TemplateSRPType.HD )
 					{
 						string texcoord1 = string.Empty;
 						string texcoord2 = string.Empty;
@@ -331,13 +325,7 @@ namespace AmplifyShaderEditor
 
 				normal = m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector );
 				if( m_normalSpace == ViewSpace.Tangent )
-				{
 					normal = "WorldNormalVector( " + Constants.InputVarStr + " , " + normal + " )";
-					if( m_normalize )
-					{
-						normal = "normalize( " + normal + " )";
-					}
-				}
 			}
 			else
 			{
@@ -351,7 +339,7 @@ namespace AmplifyShaderEditor
 					}
 				}
 
-				normal = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId, m_normalize );
+				normal = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
 			}
 
 

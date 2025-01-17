@@ -1,8 +1,8 @@
 Shader "Hidden/LinearMaterial"
 {
 	Properties
-	{
-		_MainTex( "Texture", any ) = "" {}
+	{ 
+		_MainTex( "Texture", any ) = "" {} 
 		_BackGround( "Back", 2D) = "white" {}
 	}
 
@@ -17,12 +17,9 @@ Shader "Hidden/LinearMaterial"
 		CGINCLUDE
 		uniform float4x4 unity_GUIClipTextureMatrix;
 		sampler2D _GUIClipTexture;
-
-		Texture2D _MainTex;
-		SamplerState sampler_MainTex;
+		
+		sampler2D _MainTex;
 		uniform float4 _MainTex_ST;
-
-		SamplerState my_linear_clamp_sampler;
 
 		uniform bool _ManualTex2SRGB;
 
@@ -63,10 +60,10 @@ Shader "Hidden/LinearMaterial"
 
 			float4 frag( v2f i ) : SV_Target
 			{
-				float4 c = _MainTex.Sample( my_linear_clamp_sampler, i.texcoord );
+				float4 c = tex2D( _MainTex, i.texcoord );
 				if (_ManualTex2SRGB) c.rgb = LinearToGammaSpace(c.rgb);
 				c.rgb *= _Mask.rgb;
-
+				
 				c.a = tex2D( _GUIClipTexture, i.clipUV ).a;
 				return c;
 			}
@@ -112,12 +109,12 @@ Shader "Hidden/LinearMaterial"
 
 				float alpha = saturate( ( 1 - r )*( 45 * _InvertedZoom + 5 ) );
 
-				float4 c = _MainTex.Sample( sampler_MainTex, i.texcoord );
+				float4 c = tex2D( _MainTex, i.texcoord );
 				if (_ManualTex2SRGB) c.rgb = LinearToGammaSpace(c.rgb);
 
 				c.rgb *= _Mask.rgb;
 				c.rgb *= alpha;
-
+				
 				c.a = tex2D( _GUIClipTexture, i.clipUV ).a;
 				return c;
 			}
@@ -163,7 +160,7 @@ Shader "Hidden/LinearMaterial"
 			{
 				float3 back = tex2D( _BackGround, ( i.texcoord * 2 - 1 ) * _InvertedZoom).b;
 
-				float4 c = _MainTex.Sample( sampler_MainTex, i.texcoord );
+				float4 c = tex2D( _MainTex, i.texcoord );
 				if (_ManualTex2SRGB) c.rgb = LinearToGammaSpace(c.rgb);
 
 				c.rgb *= _Mask.rgb;
@@ -218,7 +215,7 @@ Shader "Hidden/LinearMaterial"
 				float alpha = saturate( ( 1 - r )*( 45 * _InvertedZoom + 5 ) );
 
 				float4 c = 0;
-				c = _MainTex.Sample( sampler_MainTex, i.texcoord );
+				c = tex2D( _MainTex, i.texcoord );
 				if (_ManualTex2SRGB) c.rgb = LinearToGammaSpace(c.rgb);
 				c.rgb *= _Mask.rgb;
 				c.rgb = lerp( back, c.rgb, c.a * alpha);

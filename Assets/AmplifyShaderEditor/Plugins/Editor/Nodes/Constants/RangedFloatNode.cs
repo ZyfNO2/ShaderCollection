@@ -52,7 +52,11 @@ namespace AmplifyShaderEditor
 			m_showHybridInstancedUI = true;
 			m_selectedLocation = PreviewLocation.BottomCenter;
 			m_availableAttribs.Add( new PropertyAttributes( "Toggle", "[Toggle]" ) );
+#if UNITY_2018_1_OR_NEWER
 			m_availableAttribs.Add( new PropertyAttributes( "No Keyword Toggle", "[ToggleUI]","[NoKeywordToggle]" ) );
+#else
+			m_availableAttribs.Add( new PropertyAttributes( "No Keyword Toggle", "[NoKeywordToggle]" ) );
+#endif
 			m_availableAttribs.Add( new PropertyAttributes( "Int Range", "[IntRange]" ) );
 			m_availableAttribs.Add( new PropertyAttributes( "Enum", "[Enum]" ) );
 			m_previewShaderGUID = "d9ca47581ac157145bff6f72ac5dd73e";
@@ -435,16 +439,13 @@ namespace AmplifyShaderEditor
 
 		public override string GetPropertyValue()
 		{
-			string value = UIUtils.PropertyFloatToString( m_defaultValue );
 			if ( m_floatMode )
 			{
-				return PropertyAttributes + m_propertyName + "(\"" + m_propertyInspectorName + "\", Float) = " + value;
+				return PropertyAttributes + m_propertyName + "(\"" + m_propertyInspectorName + "\", Float) = " + m_defaultValue;
 			}
 			else
 			{
-				string min = UIUtils.PropertyFloatToString( m_min );
-				string max = UIUtils.PropertyFloatToString( m_max );
-				return PropertyAttributes + m_propertyName + "(\"" + m_propertyInspectorName + "\", Range( " + min + " , " + max + ")) = " + value;
+				return PropertyAttributes + m_propertyName + "(\"" + m_propertyInspectorName + "\", Range( " + m_min + " , " + m_max + ")) = " + m_defaultValue;
 			}
 		}
 
